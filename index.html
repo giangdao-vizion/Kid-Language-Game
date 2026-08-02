@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tiny Ears — Học tiếng Anh vui</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="sky" aria-hidden="true">
+    <span class="bubble b1"></span>
+    <span class="bubble b2"></span>
+    <span class="bubble b3"></span>
+    <span class="bubble b4"></span>
+  </div>
+
+  <main class="app">
+    <!-- HOME -->
+    <section id="home" class="screen active" aria-label="Màn hình chính">
+      <header class="brand">
+        <p class="brand-mark">Tiny Ears</p>
+        <h1>Chạm vào ảnh, nghe tiếng Anh!</h1>
+        <p class="subtitle">Chọn một chủ đề để bắt đầu học nào</p>
+      </header>
+
+      <nav class="categories" aria-label="Các chủ đề">
+        <button class="cat-btn" data-category="animals" style="--accent:#FF8A65">
+          <span class="cat-icon" aria-hidden="true">
+            <img src="assets/images/animals/cat.svg" alt="" />
+          </span>
+          <span class="cat-label">Animals</span>
+          <span class="cat-sub">Con vật</span>
+        </button>
+        <button class="cat-btn" data-category="fruits" style="--accent:#EF5350">
+          <span class="cat-icon" aria-hidden="true">
+            <img src="assets/images/fruits/apple.svg" alt="" />
+          </span>
+          <span class="cat-label">Fruits</span>
+          <span class="cat-sub">Trái cây</span>
+        </button>
+        <button class="cat-btn" data-category="home" style="--accent:#42A5F5">
+          <span class="cat-icon" aria-hidden="true">
+            <img src="assets/images/home/cup.svg" alt="" />
+          </span>
+          <span class="cat-label">Home</span>
+          <span class="cat-sub">Đồ vật</span>
+        </button>
+        <button class="cat-btn" data-category="vehicles" style="--accent:#66BB6A">
+          <span class="cat-icon" aria-hidden="true">
+            <img src="assets/images/vehicles/car.svg" alt="" />
+          </span>
+          <span class="cat-label">Vehicles</span>
+          <span class="cat-sub">Các loại xe</span>
+        </button>
+        <button class="cat-btn" data-category="colors" style="--accent:#AB47BC">
+          <span class="cat-icon" aria-hidden="true">
+            <img src="assets/images/colors/rainbow-preview.svg" alt="" id="color-preview" />
+          </span>
+          <span class="cat-label">Colors</span>
+          <span class="cat-sub">Màu sắc</span>
+        </button>
+      </nav>
+    </section>
+
+    <!-- LESSON -->
+    <section id="lesson" class="screen" aria-label="Bài học" hidden>
+      <header class="lesson-top">
+        <button id="back-btn" class="icon-btn" type="button" aria-label="Quay lại">←</button>
+        <div class="lesson-meta">
+          <p id="category-title" class="lesson-cat">Animals</p>
+          <p id="progress" class="lesson-progress">1 / 8</p>
+        </div>
+        <button id="shuffle-btn" class="icon-btn" type="button" aria-label="Trộn bài" title="Trộn thứ tự">↻</button>
+      </header>
+
+      <div class="lesson-stage">
+        <p class="tap-hint" id="tap-hint">Chạm vào hình để nghe</p>
+
+        <button id="card" class="word-card" type="button" aria-label="Phát âm từ">
+          <img id="word-image" src="" alt="" />
+          <span class="pulse-ring" aria-hidden="true"></span>
+        </button>
+
+        <div class="word-panel">
+          <p id="word-text" class="word-text">apple</p>
+          <p id="word-hint" class="word-hint">quả táo</p>
+        </div>
+
+        <div class="controls">
+          <button id="prev-btn" class="nav-btn" type="button" aria-label="Từ trước">‹ Trước</button>
+          <button id="speak-btn" class="speak-btn" type="button" aria-label="Nghe lại">Nghe lại</button>
+          <button id="next-btn" class="nav-btn" type="button" aria-label="Từ sau">Sau ›</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <audio id="player" preload="auto"></audio>
+  <script src="js/app.js" type="module"></script>
+</body>
+</html>
