@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%" r="70%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#E8F8F0"/>
+    </radialGradient>
+  </defs>
+  <rect width="400" height="400" rx="40" fill="url(#bg)"/>
+  
+  <rect x="60" y="150" width="160" height="110" rx="10" fill="#27AE60"/>
+  <rect x="220" y="170" width="110" height="90" rx="12" fill="#2ECC71"/>
+  <rect x="240" y="185" width="55" height="45" rx="6" fill="#AED6F1"/>
+  <circle cx="110" cy="275" r="28" fill="#2C3E50"/>
+  <circle cx="110" cy="275" r="14" fill="#95A5A6"/>
+  <circle cx="280" cy="275" r="28" fill="#2C3E50"/>
+  <circle cx="280" cy="275" r="14" fill="#95A5A6"/>
+  <circle cx="310" cy="210" r="8" fill="#F1C40F"/>
+  
+  <circle cx="127.4" cy="200" r="4.199999999999999" fill="#2C3E50"/>
+  <circle cx="152.6" cy="200" r="4.199999999999999" fill="#2C3E50"/>
+  <circle cx="128.8" cy="198.6" r="1.54" fill="#fff"/>
+  <circle cx="154.0" cy="198.6" r="1.54" fill="#fff"/>
+  <path d="M 131.6 211.2 Q 140 219.6 148.4 211.2"
+        fill="none" stroke="#2C3E50" stroke-width="2.4499999999999997" stroke-linecap="round"/>
+
+
+</svg>

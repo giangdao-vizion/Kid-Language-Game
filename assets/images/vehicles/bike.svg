@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%" r="70%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#FDEDEC"/>
+    </radialGradient>
+  </defs>
+  <rect width="400" height="400" rx="40" fill="url(#bg)"/>
+  
+  <circle cx="120" cy="250" r="55" fill="none" stroke="#2C3E50" stroke-width="12"/>
+  <circle cx="280" cy="250" r="55" fill="none" stroke="#2C3E50" stroke-width="12"/>
+  <circle cx="120" cy="250" r="12" fill="#95A5A6"/>
+  <circle cx="280" cy="250" r="12" fill="#95A5A6"/>
+  <path d="M120 250 L200 150 L280 250" fill="none" stroke="#E74C3C" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M200 150 L200 120" stroke="#E74C3C" stroke-width="10" stroke-linecap="round"/>
+  <path d="M175 120 L230 115" stroke="#2C3E50" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="200" cy="200" r="14" fill="#F1C40F"/>
+  
+  <circle cx="190.1" cy="175" r="3.3000000000000003" fill="#2C3E50"/>
+  <circle cx="209.9" cy="175" r="3.3000000000000003" fill="#2C3E50"/>
+  <circle cx="191.2" cy="173.9" r="1.2100000000000002" fill="#fff"/>
+  <circle cx="211.0" cy="173.9" r="1.2100000000000002" fill="#fff"/>
+  <path d="M 193.4 183.8 Q 200 190.4 206.6 183.8"
+        fill="none" stroke="#2C3E50" stroke-width="1.9250000000000003" stroke-linecap="round"/>
+
+
+</svg>

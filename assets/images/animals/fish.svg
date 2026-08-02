@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%" r="70%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#FFEDE5"/>
+    </radialGradient>
+  </defs>
+  <rect width="400" height="400" rx="40" fill="url(#bg)"/>
+  
+  <ellipse cx="190" cy="200" rx="110" ry="65" fill="#FF8C69"/>
+  <polygon points="300,200 360,150 360,250" fill="#FF7A54"/>
+  <polygon points="190,135 210,100 170,100" fill="#FF7A54"/>
+  <circle cx="140" cy="185" r="12" fill="#2C3E50"/>
+  <circle cx="144" cy="181" r="4" fill="#fff"/>
+  <path d="M160 215 Q190 235 220 215" fill="none" stroke="#2C3E50" stroke-width="3" stroke-linecap="round"/>
+  <ellipse cx="210" cy="200" rx="18" ry="28" fill="#FFB347" opacity="0.7"/>
+  <ellipse cx="250" cy="200" rx="14" ry="22" fill="#FFB347" opacity="0.7"/>
+
+</svg>
