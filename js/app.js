@@ -59,20 +59,26 @@ function shuffle(list) {
 }
 
 function openCategory(category) {
+  if (!lessons[category]?.length) {
+    wordHint.textContent = "Đang tải bài học, thử lại nhé!";
+    return;
+  }
   currentCategory = category;
-  queue = [...(lessons[category] || [])];
+  queue = [...lessons[category]];
   index = 0;
   heard = new Set();
   categoryTitle.textContent = CATEGORY_META[category]?.title || category;
   showScreen(lessonScreen);
-  renderCard(true);
+  renderCard();
+  // Play in the same user-gesture turn so browsers allow audio.
+  playWord();
 }
 
 function currentItem() {
   return queue[index];
 }
 
-function renderCard(autoPlay = false) {
+function renderCard() {
   const item = currentItem();
   if (!item) return;
 
@@ -92,10 +98,6 @@ function renderCard(autoPlay = false) {
   tapHint.textContent = heard.has(item.id)
     ? "Chạm để nghe lại"
     : "Chạm vào hình để nghe";
-
-  if (autoPlay) {
-    window.setTimeout(() => playWord(), 220);
-  }
 }
 
 function burstConfetti(origin) {
@@ -146,7 +148,7 @@ function go(delta) {
   const next = index + delta;
   if (next < 0 || next >= queue.length) return;
   index = next;
-  renderCard(false);
+  renderCard();
 }
 
 document.querySelectorAll(".cat-btn").forEach((btn) => {
@@ -166,7 +168,7 @@ shuffleBtn.addEventListener("click", () => {
   const currentId = currentItem()?.id;
   queue = shuffle(queue);
   index = Math.max(0, queue.findIndex((item) => item.id === currentId));
-  renderCard(false);
+  renderCard();
 });
 
 document.addEventListener("keydown", (event) => {
