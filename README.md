@@ -2,6 +2,8 @@
 
 Trang web HTML/CSS/JS tương tác giúp trẻ học từ vựng tiếng Anh bằng cách **chạm vào hình ảnh để nghe phát âm**.
 
+**Chơi ngay:** [https://giangdao-vizion.github.io/Kid-Language-Game/](https://giangdao-vizion.github.io/Kid-Language-Game/)
+
 ## Cách chạy
 
 Mở `index.html` bằng trình duyệt, hoặc chạy máy chủ tĩnh:
