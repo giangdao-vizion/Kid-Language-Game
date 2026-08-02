@@ -1,7 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="16" fill="#FF6B4A"/>
-  <circle cx="32" cy="34" r="16" fill="#FFF8F0"/>
-  <circle cx="26" cy="32" r="2.5" fill="#2B3A4A"/>
-  <circle cx="38" cy="32" r="2.5" fill="#2B3A4A"/>
-  <path d="M26 40 Q32 45 38 40" fill="none" stroke="#2B3A4A" stroke-width="2.5" stroke-linecap="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Tiny Ears">
+  <rect width="64" height="64" rx="14" fill="#FF6B4A"/>
+  <!-- outer ear -->
+  <path d="M34 10c-11 0-20 9.5-20 24 0 10 6 18 14 20 2.2.6 4-.8 4-3V40c0-7 4-12 10-14 4-1.2 7-5 7-9.5C49 12 42 10 34 10z" fill="#FFF6EC"/>
+  <!-- inner ear -->
+  <path d="M30 18c-6.5 1.5-11 8-11 15.5 0 5.5 3 10 7.2 12.2.9.5 1.8-.2 1.8-1.2V38c0-5.5 3.2-9.5 8-11.2 2.2-.8 3.8-3 3.8-5.6 0-4-4.2-5.8-9.8-3.2z" fill="#FFC4A8"/>
+  <!-- face on lobe -->
+  <circle cx="28" cy="46" r="2.2" fill="#2B3A4A"/>
+  <circle cx="36" cy="46" r="2.2" fill="#2B3A4A"/>
+  <circle cx="24.5" cy="49" r="1.8" fill="#FF9BB3" opacity=".9"/>
+  <circle cx="39.5" cy="49" r="1.8" fill="#FF9BB3" opacity=".9"/>
+  <path d="M29.5 51.5c1.5 1.6 3.5 1.6 5 0" fill="none" stroke="#2B3A4A" stroke-width="1.8" stroke-linecap="round"/>
 </svg>
