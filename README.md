@@ -27,7 +27,7 @@ Sau đó vào `http://localhost:8080`.
 ## Assets
 
 - Hình minh họa SVG dễ thương: `assets/images/`
-- Âm thanh phát âm tiếng Anh (edge-tts, giọng AnaNeural): `assets/audio/`
+- Âm thanh phát âm tiếng Anh (Woman / Man): `assets/audio/`
 - Dữ liệu bài học: `js/lessons.json`
 
 Tạo lại assets:
@@ -38,6 +38,16 @@ python3 scripts/generate_assets.py
 
 ## Cách chơi
 
-1. Chọn một chủ đề trên màn hình chính.
-2. Chạm vào hình (hoặc nút **Nghe lại**) để nghe từ tiếng Anh.
-3. Dùng **Trước / Sau** để chuyển từ, **↻** để trộn thứ tự.
+1. Chọn giọng **Woman** hoặc **Man**, và thứ tự **Theo thứ tự** / **Ngẫu nhiên**.
+2. Chọn một chủ đề trên màn hình chính.
+3. Chạm vào hình (hoặc nút **Nghe lại**) để nghe từ tiếng Anh.
+4. Dùng **Trước / Sau** để chuyển từ, **↻** để xáo trộn lại.
+
+## Giọng đọc
+
+| Lựa chọn | Giọng |
+|----------|-------|
+| Woman | en-US-JennyNeural |
+| Man | en-US-AndrewNeural |
+
+Âm thanh nằm trong `assets/audio/woman/` và `assets/audio/man/`.

@@ -6,6 +6,9 @@ const CATEGORY_META = {
   colors: { title: "Colors", subtitle: "Màu sắc" },
 };
 
+const VOICE_KEY = "tiny-ears-voice";
+const ORDER_KEY = "tiny-ears-order";
+
 const homeScreen = document.getElementById("home");
 const lessonScreen = document.getElementById("lesson");
 const categoryTitle = document.getElementById("category-title");
@@ -27,12 +30,29 @@ let currentCategory = null;
 let queue = [];
 let index = 0;
 let heard = new Set();
+let currentVoice = localStorage.getItem(VOICE_KEY) || "woman";
+let orderMode = localStorage.getItem(ORDER_KEY) || "normal";
 
 function speakerIcon() {
   return `<svg class="speaker" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4zm11.5 3a3.5 3.5 0 0 0-1.5-2.9v5.8A3.5 3.5 0 0 0 15.5 12zm0-7.2v2.06A6.5 6.5 0 0 1 19 12a6.5 6.5 0 0 1-3.5 5.14v2.06A8.5 8.5 0 0 0 21 12a8.5 8.5 0 0 0-5.5-7.2z"/></svg>`;
 }
 
 speakBtn.innerHTML = `${speakerIcon()} Nghe lại`;
+
+function syncOptionButtons() {
+  document.querySelectorAll("[data-voice]").forEach((btn) => {
+    const active = btn.dataset.voice === currentVoice;
+    btn.classList.toggle("active", active);
+    btn.setAttribute("aria-pressed", String(active));
+  });
+  document.querySelectorAll("[data-order]").forEach((btn) => {
+    const active = btn.dataset.order === orderMode;
+    btn.classList.toggle("active", active);
+    btn.setAttribute("aria-pressed", String(active));
+  });
+  shuffleBtn.classList.toggle("is-random", orderMode === "random");
+  shuffleBtn.title = orderMode === "random" ? "Xáo trộn lại (đang random)" : "Xáo trộn lại";
+}
 
 async function loadLessons() {
   const res = await fetch("js/lessons.json");
@@ -58,19 +78,29 @@ function shuffle(list) {
   return arr;
 }
 
+function buildQueue(category) {
+  const base = [...(lessons[category] || [])];
+  return orderMode === "random" ? shuffle(base) : base;
+}
+
+function audioFor(item) {
+  if (!item?.audio) return "";
+  if (typeof item.audio === "string") return item.audio;
+  return item.audio[currentVoice] || item.audio.woman || item.audio.man || "";
+}
+
 function openCategory(category) {
   if (!lessons[category]?.length) {
     wordHint.textContent = "Đang tải bài học, thử lại nhé!";
     return;
   }
   currentCategory = category;
-  queue = [...lessons[category]];
+  queue = buildQueue(category);
   index = 0;
   heard = new Set();
   categoryTitle.textContent = CATEGORY_META[category]?.title || category;
   showScreen(lessonScreen);
   renderCard();
-  // Play in the same user-gesture turn so browsers allow audio.
   playWord();
 }
 
@@ -128,7 +158,7 @@ function playWord() {
   card.classList.add("playing");
 
   player.pause();
-  player.src = item.audio;
+  player.src = audioFor(item);
   player.currentTime = 0;
   const playPromise = player.play();
   if (playPromise) {
@@ -151,8 +181,33 @@ function go(delta) {
   renderCard();
 }
 
+function setVoice(voice) {
+  if (voice !== "man" && voice !== "woman") return;
+  currentVoice = voice;
+  localStorage.setItem(VOICE_KEY, voice);
+  syncOptionButtons();
+  if (lessonScreen.classList.contains("active") && currentItem()) {
+    playWord();
+  }
+}
+
+function setOrderMode(mode) {
+  if (mode !== "normal" && mode !== "random") return;
+  orderMode = mode;
+  localStorage.setItem(ORDER_KEY, mode);
+  syncOptionButtons();
+}
+
 document.querySelectorAll(".cat-btn").forEach((btn) => {
   btn.addEventListener("click", () => openCategory(btn.dataset.category));
+});
+
+document.querySelectorAll("[data-voice]").forEach((btn) => {
+  btn.addEventListener("click", () => setVoice(btn.dataset.voice));
+});
+
+document.querySelectorAll("[data-order]").forEach((btn) => {
+  btn.addEventListener("click", () => setOrderMode(btn.dataset.order));
 });
 
 card.addEventListener("click", playWord);
@@ -165,10 +220,11 @@ backBtn.addEventListener("click", () => {
 });
 shuffleBtn.addEventListener("click", () => {
   if (!currentCategory) return;
-  const currentId = currentItem()?.id;
   queue = shuffle(queue);
-  index = Math.max(0, queue.findIndex((item) => item.id === currentId));
+  index = 0;
+  heard = new Set();
   renderCard();
+  playWord();
 });
 
 document.addEventListener("keydown", (event) => {
@@ -184,6 +240,8 @@ document.addEventListener("keydown", (event) => {
     showScreen(homeScreen);
   }
 });
+
+syncOptionButtons();
 
 loadLessons().catch((err) => {
   wordText.textContent = "Oops!";
