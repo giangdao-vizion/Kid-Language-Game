@@ -30,6 +30,23 @@
         <p class="subtitle">Chọn một chủ đề để bắt đầu học nào</p>
       </header>
 
+      <div class="home-options" aria-label="Tùy chọn học">
+        <div class="option-group">
+          <p class="option-label">Giọng đọc</p>
+          <div class="segmented" role="radiogroup" aria-label="Chọn giọng đọc">
+            <button type="button" class="segment-btn active" data-voice="woman" aria-pressed="true">Woman</button>
+            <button type="button" class="segment-btn" data-voice="man" aria-pressed="false">Man</button>
+          </div>
+        </div>
+        <div class="option-group">
+          <p class="option-label">Thứ tự từ</p>
+          <div class="segmented" role="radiogroup" aria-label="Chế độ thứ tự từ">
+            <button type="button" class="segment-btn active" data-order="normal" aria-pressed="true">Theo thứ tự</button>
+            <button type="button" class="segment-btn" data-order="random" aria-pressed="false">Ngẫu nhiên</button>
+          </div>
+        </div>
+      </div>
+
       <nav class="categories" aria-label="Các chủ đề">
         <button class="cat-btn" data-category="animals" style="--accent:#FF8A65">
           <span class="cat-icon" aria-hidden="true">
@@ -77,7 +94,7 @@
           <p id="category-title" class="lesson-cat">Animals</p>
           <p id="progress" class="lesson-progress">1 / 8</p>
         </div>
-        <button id="shuffle-btn" class="icon-btn" type="button" aria-label="Trộn bài" title="Trộn thứ tự">↻</button>
+        <button id="shuffle-btn" class="icon-btn" type="button" aria-label="Xáo trộn lại" title="Xáo trộn lại">↻</button>
       </header>
 
       <div class="lesson-stage">

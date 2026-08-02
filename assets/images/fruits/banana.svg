@@ -3,22 +3,49 @@
   <defs>
     <radialGradient id="bg" cx="50%" cy="40%" r="70%">
       <stop offset="0%" stop-color="#FFFFFF"/>
-      <stop offset="100%" stop-color="#FFF9E0"/>
+      <stop offset="100%" stop-color="#FFF8DC"/>
     </radialGradient>
+    <linearGradient id="peel" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFE566"/>
+      <stop offset="45%" stop-color="#F4C430"/>
+      <stop offset="100%" stop-color="#E0A800"/>
+    </linearGradient>
   </defs>
   <rect width="400" height="400" rx="40" fill="url(#bg)"/>
-  
-  <path d="M120 100 Q80 200 140 320 Q200 340 220 280 Q180 180 200 100 Q160 90 120 100"
-        fill="#F1C40F"/>
-  <path d="M140 120 Q110 200 155 290" fill="none" stroke="#F39C12" stroke-width="6" stroke-linecap="round" opacity="0.5"/>
-  
-  <ellipse cx="142.6" cy="206.4" rx="8.0" ry="4.800000000000001" fill="#FFB6C1" opacity="0.7"/>
-  <ellipse cx="187.4" cy="206.4" rx="8.0" ry="4.800000000000001" fill="#FFB6C1" opacity="0.7"/>
 
-  <circle cx="150" cy="185" r="7" fill="#2C3E50"/>
-  <circle cx="180" cy="195" r="7" fill="#2C3E50"/>
-  <circle cx="152" cy="182" r="2.2" fill="#fff"/>
-  <circle cx="182" cy="192" r="2.2" fill="#fff"/>
-  <path d="M145 220 Q165 235 185 222" fill="none" stroke="#2C3E50" stroke-width="3" stroke-linecap="round"/>
+  <!-- Classic curved banana body -->
+  <path d="M118 78
+           C 95 130, 88 190, 102 250
+           C 112 290, 135 325, 175 345
+           C 205 358, 235 350, 248 320
+           C 262 280, 250 230, 235 175
+           C 220 120, 205 85, 175 70
+           C 155 62, 132 64, 118 78 Z"
+        fill="url(#peel)" stroke="#D4A017" stroke-width="4"/>
 
+  <!-- Highlight ridge -->
+  <path d="M150 95 C 130 150, 125 210, 138 275 C 145 305, 165 325, 190 330"
+        fill="none" stroke="#FFF3A0" stroke-width="14" stroke-linecap="round" opacity="0.55"/>
+
+  <!-- Center seam -->
+  <path d="M168 88 C 150 155, 148 220, 165 295 C 172 318, 188 330, 205 332"
+        fill="none" stroke="#C9920A" stroke-width="5" stroke-linecap="round" opacity="0.55"/>
+
+  <!-- Stem tip -->
+  <path d="M160 72 C 155 55, 165 42, 182 40 C 195 39, 205 48, 200 62 C 190 68, 175 72, 160 72 Z"
+        fill="#8B5A2B" stroke="#6D4520" stroke-width="2"/>
+  <ellipse cx="182" cy="48" rx="8" ry="5" fill="#A06A35"/>
+
+  <!-- Tip blossom end -->
+  <ellipse cx="230" cy="338" rx="14" ry="10" fill="#E8B923" transform="rotate(-25 230 338)"/>
+  <ellipse cx="236" cy="340" rx="6" ry="4" fill="#C9920A" transform="rotate(-25 236 340)"/>
+
+  <!-- Cute face -->
+  <ellipse cx="155" cy="210" rx="11" ry="7" fill="#FFB6C1" opacity="0.75"/>
+  <ellipse cx="215" cy="218" rx="11" ry="7" fill="#FFB6C1" opacity="0.75"/>
+  <circle cx="168" cy="198" r="8" fill="#2C3E50"/>
+  <circle cx="205" cy="205" r="8" fill="#2C3E50"/>
+  <circle cx="170" cy="195" r="2.5" fill="#fff"/>
+  <circle cx="207" cy="202" r="2.5" fill="#fff"/>
+  <path d="M170 230 Q188 248 210 232" fill="none" stroke="#2C3E50" stroke-width="4" stroke-linecap="round"/>
 </svg>

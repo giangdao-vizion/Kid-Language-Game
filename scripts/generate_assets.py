@@ -220,16 +220,29 @@ SVGS = {
   {face(200, 210)}
 ''', "#FFE8E8"),
     "fruits/banana": svg_wrap(f'''
-  <path d="M120 100 Q80 200 140 320 Q200 340 220 280 Q180 180 200 100 Q160 90 120 100"
-        fill="#F1C40F"/>
-  <path d="M140 120 Q110 200 155 290" fill="none" stroke="#F39C12" stroke-width="6" stroke-linecap="round" opacity="0.5"/>
-  {blush(165, 200, 0.8)}
-  <circle cx="150" cy="185" r="7" fill="#2C3E50"/>
-  <circle cx="180" cy="195" r="7" fill="#2C3E50"/>
-  <circle cx="152" cy="182" r="2.2" fill="#fff"/>
-  <circle cx="182" cy="192" r="2.2" fill="#fff"/>
-  <path d="M145 220 Q165 235 185 222" fill="none" stroke="#2C3E50" stroke-width="3" stroke-linecap="round"/>
-''', "#FFF9E0"),
+  <path d="M118 78
+           C 95 130, 88 190, 102 250
+           C 112 290, 135 325, 175 345
+           C 205 358, 235 350, 248 320
+           C 262 280, 250 230, 235 175
+           C 220 120, 205 85, 175 70
+           C 155 62, 132 64, 118 78 Z"
+        fill="#F4C430" stroke="#D4A017" stroke-width="4"/>
+  <path d="M150 95 C 130 150, 125 210, 138 275 C 145 305, 165 325, 190 330"
+        fill="none" stroke="#FFF3A0" stroke-width="14" stroke-linecap="round" opacity="0.55"/>
+  <path d="M168 88 C 150 155, 148 220, 165 295 C 172 318, 188 330, 205 332"
+        fill="none" stroke="#C9920A" stroke-width="5" stroke-linecap="round" opacity="0.55"/>
+  <path d="M160 72 C 155 55, 165 42, 182 40 C 195 39, 205 48, 200 62 C 190 68, 175 72, 160 72 Z"
+        fill="#8B5A2B"/>
+  <ellipse cx="230" cy="338" rx="14" ry="10" fill="#E8B923" transform="rotate(-25 230 338)"/>
+  <ellipse cx="155" cy="210" rx="11" ry="7" fill="#FFB6C1" opacity="0.75"/>
+  <ellipse cx="215" cy="218" rx="11" ry="7" fill="#FFB6C1" opacity="0.75"/>
+  <circle cx="168" cy="198" r="8" fill="#2C3E50"/>
+  <circle cx="205" cy="205" r="8" fill="#2C3E50"/>
+  <circle cx="170" cy="195" r="2.5" fill="#fff"/>
+  <circle cx="207" cy="202" r="2.5" fill="#fff"/>
+  <path d="M170 230 Q188 248 210 232" fill="none" stroke="#2C3E50" stroke-width="4" stroke-linecap="round"/>
+''', "#FFF8DC"),
     "fruits/orange": svg_wrap(f'''
   <circle cx="200" cy="210" r="105" fill="#FF9F43"/>
   <circle cx="200" cy="210" r="105" fill="none" stroke="#E67E22" stroke-width="3" opacity="0.3"/>
@@ -490,7 +503,13 @@ def write_images() -> int:
     return count
 
 
-async def synthesize_one(word: str, out_path: Path, voice: str = "en-US-AnaNeural") -> None:
+VOICES = {
+    "woman": "en-US-JennyNeural",
+    "man": "en-US-AndrewNeural",
+}
+
+
+async def synthesize_one(word: str, out_path: Path, voice: str) -> None:
     import edge_tts
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -500,11 +519,14 @@ async def synthesize_one(word: str, out_path: Path, voice: str = "en-US-AnaNeura
 
 async def write_audio() -> int:
     tasks = []
-    for category, items in LESSONS.items():
-        for item_id, word, _hint in items:
-            out = AUD / category / f"{item_id}.mp3"
-            tasks.append(synthesize_one(word, out))
-    await asyncio.gather(*tasks)
+    for voice_key, voice_id in VOICES.items():
+        for category, items in LESSONS.items():
+            for item_id, word, _hint in items:
+                out = AUD / voice_key / category / f"{item_id}.mp3"
+                tasks.append(synthesize_one(word, out, voice_id))
+    # Run in moderate batches.
+    for i in range(0, len(tasks), 10):
+        await asyncio.gather(*tasks[i : i + 10])
     return len(tasks)
 
 
@@ -519,13 +541,16 @@ def write_lessons_json() -> None:
                 "word": word,
                 "hint": hint,
                 "image": f"assets/images/{category}/{item_id}.svg",
-                "audio": f"assets/audio/{category}/{item_id}.mp3",
+                "audio": {
+                    voice_key: f"assets/audio/{voice_key}/{category}/{item_id}.mp3"
+                    for voice_key in VOICES
+                },
             }
             for item_id, word, hint in items
         ]
     path = ROOT / "js" / "lessons.json"
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+    path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
 async def main() -> None:
@@ -539,17 +564,19 @@ async def main() -> None:
     except Exception as exc:
         print(f"edge-tts failed ({exc}); falling back to espeak-ng")
         n_aud = 0
-        for category, items in LESSONS.items():
-            for item_id, word, _hint in items:
-                wav = AUD / category / f"{item_id}.wav"
-                mp3 = AUD / category / f"{item_id}.mp3"
-                wav.parent.mkdir(parents=True, exist_ok=True)
-                os.system(
-                    f'espeak-ng -v en-us -s 130 -w "{wav}" "{word}" && '
-                    f'ffmpeg -y -i "{wav}" -codec:a libmp3lame -qscale:a 4 "{mp3}" >/dev/null 2>&1 && '
-                    f'rm -f "{wav}"'
-                )
-                n_aud += 1
+        for voice_key in VOICES:
+            for category, items in LESSONS.items():
+                for item_id, word, _hint in items:
+                    wav = AUD / voice_key / category / f"{item_id}.wav"
+                    mp3 = AUD / voice_key / category / f"{item_id}.mp3"
+                    wav.parent.mkdir(parents=True, exist_ok=True)
+                    variant = "en-us+f2" if voice_key == "woman" else "en-us+m3"
+                    os.system(
+                        f'espeak-ng -v {variant} -s 130 -w "{wav}" "{word}" && '
+                        f'ffmpeg -y -i "{wav}" -codec:a libmp3lame -qscale:a 4 "{mp3}" >/dev/null 2>&1 && '
+                        f'rm -f "{wav}"'
+                    )
+                    n_aud += 1
         print(f"Wrote {n_aud} audio files via espeak-ng")
 
 
