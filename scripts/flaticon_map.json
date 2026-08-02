@@ -1,0 +1,165 @@
+{
+  "animals/cat": {
+    "url": "https://cdn-icons-png.flaticon.com/512/1998/1998592.png",
+    "bytes": 51024
+  },
+  "animals/dog": {
+    "url": "https://cdn-icons-png.flaticon.com/512/1998/1998627.png",
+    "bytes": 49417
+  },
+  "animals/bird": {
+    "url": "https://cdn-icons-png.flaticon.com/512/3069/3069172.png",
+    "bytes": 42223
+  },
+  "animals/fish": {
+    "url": "https://cdn-icons-png.flaticon.com/512/2395/2395887.png",
+    "bytes": 37055
+  },
+  "animals/rabbit": {
+    "url": "https://cdn-icons-png.flaticon.com/512/17180/17180399.png",
+    "bytes": 20025
+  },
+  "animals/elephant": {
+    "url": "https://cdn-icons-png.flaticon.com/512/2469/2469733.png",
+    "bytes": 17666
+  },
+  "animals/lion": {
+    "url": "https://cdn-icons-png.flaticon.com/512/17617/17617835.png",
+    "bytes": 32522
+  },
+  "animals/duck": {
+    "url": "https://cdn-icons-png.flaticon.com/512/8686/8686248.png",
+    "bytes": 45394
+  },
+  "fruits/apple": {
+    "url": "https://cdn-icons-png.flaticon.com/512/415/415733.png",
+    "bytes": 15966
+  },
+  "fruits/banana": {
+    "url": "https://cdn-icons-png.flaticon.com/512/2909/2909761.png",
+    "bytes": 43870
+  },
+  "fruits/orange": {
+    "url": "https://cdn-icons-png.flaticon.com/512/415/415731.png",
+    "bytes": 16324
+  },
+  "fruits/grape": {
+    "url": "https://cdn-icons-png.flaticon.com/512/415/415734.png",
+    "bytes": 19854
+  },
+  "fruits/strawberry": {
+    "url": "https://cdn-icons-png.flaticon.com/512/415/415735.png",
+    "bytes": 13118
+  },
+  "fruits/watermelon": {
+    "url": "https://cdn-icons-png.flaticon.com/512/415/415729.png",
+    "bytes": 22618
+  },
+  "fruits/mango": {
+    "url": "https://cdn-icons-png.flaticon.com/512/4284/4284893.png",
+    "bytes": 3967
+  },
+  "fruits/cherry": {
+    "url": "https://cdn-icons-png.flaticon.com/512/415/415726.png",
+    "bytes": 29430
+  },
+  "home/chair": {
+    "url": "https://cdn-icons-png.flaticon.com/512/9588/9588541.png",
+    "bytes": 5976
+  },
+  "home/table": {
+    "url": "https://cdn-icons-png.flaticon.com/512/6150/6150855.png"
+  },
+  "home/bed": {
+    "url": "https://cdn-icons-png.flaticon.com/512/2284/2284001.png",
+    "bytes": 10622
+  },
+  "home/lamp": {
+    "url": "https://cdn-icons-png.flaticon.com/512/1588/1588456.png",
+    "bytes": 27206
+  },
+  "home/clock": {
+    "url": "https://cdn-icons-png.flaticon.com/512/2088/2088617.png",
+    "bytes": 14864
+  },
+  "home/door": {
+    "url": "https://cdn-icons-png.flaticon.com/512/1864/1864744.png",
+    "bytes": 6381
+  },
+  "home/cup": {
+    "url": "https://cdn-icons-png.flaticon.com/512/751/751621.png",
+    "bytes": 18149
+  },
+  "home/book": {
+    "url": "https://cdn-icons-png.flaticon.com/512/5831/5831763.png",
+    "bytes": 5295
+  },
+  "vehicles/car": {
+    "url": "https://cdn-icons-png.flaticon.com/512/2555/2555013.png",
+    "bytes": 32142
+  },
+  "vehicles/bus": {
+    "url": "https://cdn-icons-png.flaticon.com/512/416/416597.png",
+    "bytes": 17362
+  },
+  "vehicles/train": {
+    "url": "https://cdn-icons-png.flaticon.com/512/1702/1702305.png",
+    "bytes": 32769
+  },
+  "vehicles/plane": {
+    "url": "https://cdn-icons-png.flaticon.com/512/14309/14309346.png",
+    "bytes": 13600
+  },
+  "vehicles/bike": {
+    "url": "https://cdn-icons-png.flaticon.com/512/418/418224.png",
+    "bytes": 29339
+  },
+  "vehicles/boat": {
+    "url": "https://cdn-icons-png.flaticon.com/512/1023/1023340.png",
+    "bytes": 19334
+  },
+  "vehicles/truck": {
+    "url": "https://cdn-icons-png.flaticon.com/512/870/870130.png",
+    "bytes": 18705
+  },
+  "vehicles/scooter": {
+    "url": "https://cdn-icons-png.flaticon.com/512/9492/9492129.png",
+    "bytes": 11503
+  },
+  "colors/red": {
+    "url": "generated-cute-swatch:red",
+    "note": "Cute color swatch for clear kid recognition"
+  },
+  "colors/blue": {
+    "url": "generated-cute-swatch:blue",
+    "note": "Cute color swatch for clear kid recognition"
+  },
+  "colors/yellow": {
+    "url": "generated-cute-swatch:yellow",
+    "note": "Cute color swatch for clear kid recognition"
+  },
+  "colors/green": {
+    "url": "generated-cute-swatch:green",
+    "note": "Cute color swatch for clear kid recognition"
+  },
+  "colors/orange": {
+    "url": "generated-cute-swatch:orange",
+    "note": "Cute color swatch for clear kid recognition"
+  },
+  "colors/purple": {
+    "url": "generated-cute-swatch:purple",
+    "note": "Cute color swatch for clear kid recognition"
+  },
+  "colors/pink": {
+    "url": "generated-cute-swatch:pink",
+    "note": "Cute color swatch for clear kid recognition"
+  },
+  "colors/brown": {
+    "url": "generated-cute-swatch:brown",
+    "note": "Cute color swatch for clear kid recognition"
+  },
+  "colors/rainbow-preview": {
+    "url": "https://cdn-icons-png.flaticon.com/512/1451/1451408.png",
+    "bytes": 29285
+  }
+}

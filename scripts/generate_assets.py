@@ -540,7 +540,7 @@ def write_lessons_json() -> None:
                 "id": item_id,
                 "word": word,
                 "hint": hint,
-                "image": f"assets/images/{category}/{item_id}.svg",
+                "image": f"assets/images/{category}/{item_id}.png",
                 "audio": {
                     voice_key: f"assets/audio/{voice_key}/{category}/{item_id}.mp3"
                     for voice_key in VOICES

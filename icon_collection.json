@@ -1,0 +1,12 @@
+{
+  "animals/cat": {
+    "url": "https://cdn-icons-png.flaticon.com/512/1998/1998592.png",
+    "author": "Flat Icons",
+    "page": "https://www.flaticon.com/free-icon/cat_1998592"
+  },
+  "animals/dog": {
+    "url": "https://cdn-icons-png.flaticon.com/512/5517/5517680.png",
+    "author": "Magnific",
+    "page": "https://www.flaticon.com/free-icon/dog_5517680"
+  }
+}

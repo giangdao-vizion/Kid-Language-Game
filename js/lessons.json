@@ -4,7 +4,7 @@
       "id": "cat",
       "word": "cat",
       "hint": "con mèo",
-      "image": "assets/images/animals/cat.svg",
+      "image": "assets/images/animals/cat.png",
       "audio": {
         "woman": "assets/audio/woman/animals/cat.mp3",
         "man": "assets/audio/man/animals/cat.mp3"
@@ -14,7 +14,7 @@
       "id": "dog",
       "word": "dog",
       "hint": "con chó",
-      "image": "assets/images/animals/dog.svg",
+      "image": "assets/images/animals/dog.png",
       "audio": {
         "woman": "assets/audio/woman/animals/dog.mp3",
         "man": "assets/audio/man/animals/dog.mp3"
@@ -24,7 +24,7 @@
       "id": "bird",
       "word": "bird",
       "hint": "con chim",
-      "image": "assets/images/animals/bird.svg",
+      "image": "assets/images/animals/bird.png",
       "audio": {
         "woman": "assets/audio/woman/animals/bird.mp3",
         "man": "assets/audio/man/animals/bird.mp3"
@@ -34,7 +34,7 @@
       "id": "fish",
       "word": "fish",
       "hint": "con cá",
-      "image": "assets/images/animals/fish.svg",
+      "image": "assets/images/animals/fish.png",
       "audio": {
         "woman": "assets/audio/woman/animals/fish.mp3",
         "man": "assets/audio/man/animals/fish.mp3"
@@ -44,7 +44,7 @@
       "id": "rabbit",
       "word": "rabbit",
       "hint": "con thỏ",
-      "image": "assets/images/animals/rabbit.svg",
+      "image": "assets/images/animals/rabbit.png",
       "audio": {
         "woman": "assets/audio/woman/animals/rabbit.mp3",
         "man": "assets/audio/man/animals/rabbit.mp3"
@@ -54,7 +54,7 @@
       "id": "elephant",
       "word": "elephant",
       "hint": "con voi",
-      "image": "assets/images/animals/elephant.svg",
+      "image": "assets/images/animals/elephant.png",
       "audio": {
         "woman": "assets/audio/woman/animals/elephant.mp3",
         "man": "assets/audio/man/animals/elephant.mp3"
@@ -64,7 +64,7 @@
       "id": "lion",
       "word": "lion",
       "hint": "con sư tử",
-      "image": "assets/images/animals/lion.svg",
+      "image": "assets/images/animals/lion.png",
       "audio": {
         "woman": "assets/audio/woman/animals/lion.mp3",
         "man": "assets/audio/man/animals/lion.mp3"
@@ -74,7 +74,7 @@
       "id": "duck",
       "word": "duck",
       "hint": "con vịt",
-      "image": "assets/images/animals/duck.svg",
+      "image": "assets/images/animals/duck.png",
       "audio": {
         "woman": "assets/audio/woman/animals/duck.mp3",
         "man": "assets/audio/man/animals/duck.mp3"
@@ -86,7 +86,7 @@
       "id": "apple",
       "word": "apple",
       "hint": "quả táo",
-      "image": "assets/images/fruits/apple.svg",
+      "image": "assets/images/fruits/apple.png",
       "audio": {
         "woman": "assets/audio/woman/fruits/apple.mp3",
         "man": "assets/audio/man/fruits/apple.mp3"
@@ -96,7 +96,7 @@
       "id": "banana",
       "word": "banana",
       "hint": "quả chuối",
-      "image": "assets/images/fruits/banana.svg",
+      "image": "assets/images/fruits/banana.png",
       "audio": {
         "woman": "assets/audio/woman/fruits/banana.mp3",
         "man": "assets/audio/man/fruits/banana.mp3"
@@ -106,7 +106,7 @@
       "id": "orange",
       "word": "orange",
       "hint": "quả cam",
-      "image": "assets/images/fruits/orange.svg",
+      "image": "assets/images/fruits/orange.png",
       "audio": {
         "woman": "assets/audio/woman/fruits/orange.mp3",
         "man": "assets/audio/man/fruits/orange.mp3"
@@ -116,7 +116,7 @@
       "id": "grape",
       "word": "grape",
       "hint": "nho",
-      "image": "assets/images/fruits/grape.svg",
+      "image": "assets/images/fruits/grape.png",
       "audio": {
         "woman": "assets/audio/woman/fruits/grape.mp3",
         "man": "assets/audio/man/fruits/grape.mp3"
@@ -126,7 +126,7 @@
       "id": "strawberry",
       "word": "strawberry",
       "hint": "dâu tây",
-      "image": "assets/images/fruits/strawberry.svg",
+      "image": "assets/images/fruits/strawberry.png",
       "audio": {
         "woman": "assets/audio/woman/fruits/strawberry.mp3",
         "man": "assets/audio/man/fruits/strawberry.mp3"
@@ -136,7 +136,7 @@
       "id": "watermelon",
       "word": "watermelon",
       "hint": "dưa hấu",
-      "image": "assets/images/fruits/watermelon.svg",
+      "image": "assets/images/fruits/watermelon.png",
       "audio": {
         "woman": "assets/audio/woman/fruits/watermelon.mp3",
         "man": "assets/audio/man/fruits/watermelon.mp3"
@@ -146,7 +146,7 @@
       "id": "mango",
       "word": "mango",
       "hint": "quả xoài",
-      "image": "assets/images/fruits/mango.svg",
+      "image": "assets/images/fruits/mango.png",
       "audio": {
         "woman": "assets/audio/woman/fruits/mango.mp3",
         "man": "assets/audio/man/fruits/mango.mp3"
@@ -156,7 +156,7 @@
       "id": "cherry",
       "word": "cherry",
       "hint": "quả anh đào",
-      "image": "assets/images/fruits/cherry.svg",
+      "image": "assets/images/fruits/cherry.png",
       "audio": {
         "woman": "assets/audio/woman/fruits/cherry.mp3",
         "man": "assets/audio/man/fruits/cherry.mp3"
@@ -168,7 +168,7 @@
       "id": "chair",
       "word": "chair",
       "hint": "cái ghế",
-      "image": "assets/images/home/chair.svg",
+      "image": "assets/images/home/chair.png",
       "audio": {
         "woman": "assets/audio/woman/home/chair.mp3",
         "man": "assets/audio/man/home/chair.mp3"
@@ -178,7 +178,7 @@
       "id": "table",
       "word": "table",
       "hint": "cái bàn",
-      "image": "assets/images/home/table.svg",
+      "image": "assets/images/home/table.png",
       "audio": {
         "woman": "assets/audio/woman/home/table.mp3",
         "man": "assets/audio/man/home/table.mp3"
@@ -188,7 +188,7 @@
       "id": "bed",
       "word": "bed",
       "hint": "cái giường",
-      "image": "assets/images/home/bed.svg",
+      "image": "assets/images/home/bed.png",
       "audio": {
         "woman": "assets/audio/woman/home/bed.mp3",
         "man": "assets/audio/man/home/bed.mp3"
@@ -198,7 +198,7 @@
       "id": "lamp",
       "word": "lamp",
       "hint": "đèn",
-      "image": "assets/images/home/lamp.svg",
+      "image": "assets/images/home/lamp.png",
       "audio": {
         "woman": "assets/audio/woman/home/lamp.mp3",
         "man": "assets/audio/man/home/lamp.mp3"
@@ -208,7 +208,7 @@
       "id": "clock",
       "word": "clock",
       "hint": "đồng hồ",
-      "image": "assets/images/home/clock.svg",
+      "image": "assets/images/home/clock.png",
       "audio": {
         "woman": "assets/audio/woman/home/clock.mp3",
         "man": "assets/audio/man/home/clock.mp3"
@@ -218,7 +218,7 @@
       "id": "door",
       "word": "door",
       "hint": "cánh cửa",
-      "image": "assets/images/home/door.svg",
+      "image": "assets/images/home/door.png",
       "audio": {
         "woman": "assets/audio/woman/home/door.mp3",
         "man": "assets/audio/man/home/door.mp3"
@@ -228,7 +228,7 @@
       "id": "cup",
       "word": "cup",
       "hint": "cái cốc",
-      "image": "assets/images/home/cup.svg",
+      "image": "assets/images/home/cup.png",
       "audio": {
         "woman": "assets/audio/woman/home/cup.mp3",
         "man": "assets/audio/man/home/cup.mp3"
@@ -238,7 +238,7 @@
       "id": "book",
       "word": "book",
       "hint": "quyển sách",
-      "image": "assets/images/home/book.svg",
+      "image": "assets/images/home/book.png",
       "audio": {
         "woman": "assets/audio/woman/home/book.mp3",
         "man": "assets/audio/man/home/book.mp3"
@@ -250,7 +250,7 @@
       "id": "car",
       "word": "car",
       "hint": "xe hơi",
-      "image": "assets/images/vehicles/car.svg",
+      "image": "assets/images/vehicles/car.png",
       "audio": {
         "woman": "assets/audio/woman/vehicles/car.mp3",
         "man": "assets/audio/man/vehicles/car.mp3"
@@ -260,7 +260,7 @@
       "id": "bus",
       "word": "bus",
       "hint": "xe buýt",
-      "image": "assets/images/vehicles/bus.svg",
+      "image": "assets/images/vehicles/bus.png",
       "audio": {
         "woman": "assets/audio/woman/vehicles/bus.mp3",
         "man": "assets/audio/man/vehicles/bus.mp3"
@@ -270,7 +270,7 @@
       "id": "train",
       "word": "train",
       "hint": "tàu hỏa",
-      "image": "assets/images/vehicles/train.svg",
+      "image": "assets/images/vehicles/train.png",
       "audio": {
         "woman": "assets/audio/woman/vehicles/train.mp3",
         "man": "assets/audio/man/vehicles/train.mp3"
@@ -280,7 +280,7 @@
       "id": "plane",
       "word": "plane",
       "hint": "máy bay",
-      "image": "assets/images/vehicles/plane.svg",
+      "image": "assets/images/vehicles/plane.png",
       "audio": {
         "woman": "assets/audio/woman/vehicles/plane.mp3",
         "man": "assets/audio/man/vehicles/plane.mp3"
@@ -290,7 +290,7 @@
       "id": "bike",
       "word": "bike",
       "hint": "xe đạp",
-      "image": "assets/images/vehicles/bike.svg",
+      "image": "assets/images/vehicles/bike.png",
       "audio": {
         "woman": "assets/audio/woman/vehicles/bike.mp3",
         "man": "assets/audio/man/vehicles/bike.mp3"
@@ -300,7 +300,7 @@
       "id": "boat",
       "word": "boat",
       "hint": "thuyền",
-      "image": "assets/images/vehicles/boat.svg",
+      "image": "assets/images/vehicles/boat.png",
       "audio": {
         "woman": "assets/audio/woman/vehicles/boat.mp3",
         "man": "assets/audio/man/vehicles/boat.mp3"
@@ -310,7 +310,7 @@
       "id": "truck",
       "word": "truck",
       "hint": "xe tải",
-      "image": "assets/images/vehicles/truck.svg",
+      "image": "assets/images/vehicles/truck.png",
       "audio": {
         "woman": "assets/audio/woman/vehicles/truck.mp3",
         "man": "assets/audio/man/vehicles/truck.mp3"
@@ -320,7 +320,7 @@
       "id": "scooter",
       "word": "scooter",
       "hint": "xe scooter",
-      "image": "assets/images/vehicles/scooter.svg",
+      "image": "assets/images/vehicles/scooter.png",
       "audio": {
         "woman": "assets/audio/woman/vehicles/scooter.mp3",
         "man": "assets/audio/man/vehicles/scooter.mp3"
@@ -332,7 +332,7 @@
       "id": "red",
       "word": "red",
       "hint": "màu đỏ",
-      "image": "assets/images/colors/red.svg",
+      "image": "assets/images/colors/red.png",
       "audio": {
         "woman": "assets/audio/woman/colors/red.mp3",
         "man": "assets/audio/man/colors/red.mp3"
@@ -342,7 +342,7 @@
       "id": "blue",
       "word": "blue",
       "hint": "màu xanh dương",
-      "image": "assets/images/colors/blue.svg",
+      "image": "assets/images/colors/blue.png",
       "audio": {
         "woman": "assets/audio/woman/colors/blue.mp3",
         "man": "assets/audio/man/colors/blue.mp3"
@@ -352,7 +352,7 @@
       "id": "yellow",
       "word": "yellow",
       "hint": "màu vàng",
-      "image": "assets/images/colors/yellow.svg",
+      "image": "assets/images/colors/yellow.png",
       "audio": {
         "woman": "assets/audio/woman/colors/yellow.mp3",
         "man": "assets/audio/man/colors/yellow.mp3"
@@ -362,7 +362,7 @@
       "id": "green",
       "word": "green",
       "hint": "màu xanh lá",
-      "image": "assets/images/colors/green.svg",
+      "image": "assets/images/colors/green.png",
       "audio": {
         "woman": "assets/audio/woman/colors/green.mp3",
         "man": "assets/audio/man/colors/green.mp3"
@@ -372,7 +372,7 @@
       "id": "orange",
       "word": "orange",
       "hint": "màu cam",
-      "image": "assets/images/colors/orange.svg",
+      "image": "assets/images/colors/orange.png",
       "audio": {
         "woman": "assets/audio/woman/colors/orange.mp3",
         "man": "assets/audio/man/colors/orange.mp3"
@@ -382,7 +382,7 @@
       "id": "purple",
       "word": "purple",
       "hint": "màu tím",
-      "image": "assets/images/colors/purple.svg",
+      "image": "assets/images/colors/purple.png",
       "audio": {
         "woman": "assets/audio/woman/colors/purple.mp3",
         "man": "assets/audio/man/colors/purple.mp3"
@@ -392,7 +392,7 @@
       "id": "pink",
       "word": "pink",
       "hint": "màu hồng",
-      "image": "assets/images/colors/pink.svg",
+      "image": "assets/images/colors/pink.png",
       "audio": {
         "woman": "assets/audio/woman/colors/pink.mp3",
         "man": "assets/audio/man/colors/pink.mp3"
@@ -402,7 +402,7 @@
       "id": "brown",
       "word": "brown",
       "hint": "màu nâu",
-      "image": "assets/images/colors/brown.svg",
+      "image": "assets/images/colors/brown.png",
       "audio": {
         "woman": "assets/audio/woman/colors/brown.mp3",
         "man": "assets/audio/man/colors/brown.mp3"

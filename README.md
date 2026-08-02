@@ -26,14 +26,22 @@ Sau đó vào `http://localhost:8080`.
 
 ## Assets
 
-- Hình minh họa SVG dễ thương: `assets/images/`
+- Hình minh họa PNG từ [Flaticon](https://www.flaticon.com/) (Freepik và các tác giả khác): `assets/images/`
+- Màu sắc dùng swatch dễ thương để trẻ nhận diện rõ
 - Âm thanh phát âm tiếng Anh (Woman / Man): `assets/audio/`
 - Dữ liệu bài học: `js/lessons.json`
+- Map nguồn icon: `scripts/flaticon_map.json`
 
-Tạo lại assets:
+Tạo lại audio/SVG cũ (nếu cần):
 
 ```bash
 python3 scripts/generate_assets.py
+```
+
+Tải lại icon Flaticon theo map:
+
+```bash
+python3 scripts/download_flaticon_icons.py
 ```
 
 ## Cách chơi

@@ -1,0 +1,45 @@
+{
+  "animals/cat": {
+    "url": "https://cdn-icons-png.flaticon.com/512/1998/1998592.png",
+    "author": "Flat Icons",
+    "page": "https://www.flaticon.com/free-icon/cat_1998592",
+    "notes": "Cute orange cat with blue collar and bell. Flaticons Lineal Color style. Has outlines but very colorful and cute."
+  },
+  "animals/dog": {
+    "url": "https://cdn-icons-png.flaticon.com/512/5517/5517680.png",
+    "author": "Magnific",
+    "page": "https://www.flaticon.com/free-icon/dog_5517680",
+    "notes": "Geometric flat dog face in orange/yellow and maroon. Basic Straight Flat style. Perfect for kids - no outlines."
+  },
+  "animals/bird": {
+    "url": "https://cdn-icons-png.flaticon.com/512/1729/1729076.png",
+    "author": "juicy_fish",
+    "page": "https://www.flaticon.com/free-icon/bird-watching_1729076",
+    "notes": "Blue bird on binoculars. Juicy Fish Sketchy style. Complex but colorful. Consider searching for simpler bird."
+  },
+  "animals/fish": {
+    "url": "https://cdn-icons-png.flaticon.com/512/782/782930.png",
+    "author": "Magnific",
+    "page": "https://www.flaticon.com/free-icon/fish_782930",
+    "notes": "Fish on plate with lemons. Special Flat style. Too complex - recommend finding simpler fish icon."
+  },
+  "_STATUS": "INCOMPLETE - Only 4 of 41 icons collected. Manual process extremely time-consuming.",
+  "_CHALLENGES": [
+    "Finding consistent style across all categories is difficult",
+    "Many search results include outline-only or overly complex icons",
+    "Need to manually click through each icon to get CDN URL from page source",
+    "Filters don't always return perfect matches",
+    "Some icons are too detailed (e.g., fish with plate, bird with binoculars)"
+  ],
+  "_RECOMMENDATIONS": [
+    "Search for icon packs with consistent style (e.g., 'animals pack', 'fruits pack')",
+    "Consider using Freepik.com which has better organized packs",
+    "Look for 'sticker' style icons which tend to be more consistent",
+    "May need to accept slight style variations for practical completion",
+    "Consider purchasing a premium pack for guaranteed consistency"
+  ],
+  "_PATTERN_DISCOVERED": {
+    "cdn_url": "https://cdn-icons-png.flaticon.com/512/{first_4_digits}/{full_id}.png",
+    "example": "ID 1998592 becomes /512/1998/1998592.png"
+  }
+}
