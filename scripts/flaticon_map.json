@@ -20,8 +20,8 @@
     "bytes": 20025
   },
   "animals/elephant": {
-    "url": "https://cdn-icons-png.flaticon.com/512/2469/2469733.png",
-    "bytes": 17666
+    "url": "https://cdn-icons-png.flaticon.com/512/2371/2371637.png",
+    "bytes": 51430
   },
   "animals/lion": {
     "url": "https://cdn-icons-png.flaticon.com/512/17617/17617835.png",
@@ -64,67 +64,68 @@
     "bytes": 29430
   },
   "home/chair": {
-    "url": "https://cdn-icons-png.flaticon.com/512/9588/9588541.png",
-    "bytes": 5976
+    "url": "https://cdn-icons-png.flaticon.com/512/2944/2944135.png",
+    "bytes": 19896
   },
   "home/table": {
-    "url": "https://cdn-icons-png.flaticon.com/512/6150/6150855.png"
+    "url": "https://cdn-icons-png.flaticon.com/512/2965/2965567.png",
+    "bytes": 23155
   },
   "home/bed": {
-    "url": "https://cdn-icons-png.flaticon.com/512/2284/2284001.png",
-    "bytes": 10622
+    "url": "https://cdn-icons-png.flaticon.com/512/2965/2965569.png",
+    "bytes": 27004
   },
   "home/lamp": {
-    "url": "https://cdn-icons-png.flaticon.com/512/1588/1588456.png",
-    "bytes": 27206
+    "url": "https://cdn-icons-png.flaticon.com/512/6368/6368854.png",
+    "bytes": 32202
   },
   "home/clock": {
-    "url": "https://cdn-icons-png.flaticon.com/512/2088/2088617.png",
-    "bytes": 14864
+    "url": "https://cdn-icons-png.flaticon.com/512/2784/2784459.png",
+    "bytes": 37256
   },
   "home/door": {
-    "url": "https://cdn-icons-png.flaticon.com/512/1864/1864744.png",
-    "bytes": 6381
+    "url": "https://cdn-icons-png.flaticon.com/512/12675/12675173.png",
+    "bytes": 50175
   },
   "home/cup": {
-    "url": "https://cdn-icons-png.flaticon.com/512/751/751621.png",
-    "bytes": 18149
+    "url": "https://cdn-icons-png.flaticon.com/512/924/924514.png",
+    "bytes": 25597
   },
   "home/book": {
-    "url": "https://cdn-icons-png.flaticon.com/512/5831/5831763.png",
-    "bytes": 5295
+    "url": "https://cdn-icons-png.flaticon.com/512/3928/3928616.png",
+    "bytes": 7430
   },
   "vehicles/car": {
-    "url": "https://cdn-icons-png.flaticon.com/512/2555/2555013.png",
-    "bytes": 32142
+    "url": "https://cdn-icons-png.flaticon.com/512/3085/3085408.png",
+    "bytes": 28594
   },
   "vehicles/bus": {
-    "url": "https://cdn-icons-png.flaticon.com/512/416/416597.png",
-    "bytes": 17362
+    "url": "https://cdn-icons-png.flaticon.com/512/2554/2554930.png",
+    "bytes": 40180
   },
   "vehicles/train": {
-    "url": "https://cdn-icons-png.flaticon.com/512/1702/1702305.png",
-    "bytes": 32769
+    "url": "https://cdn-icons-png.flaticon.com/512/2554/2554950.png",
+    "bytes": 38019
   },
   "vehicles/plane": {
-    "url": "https://cdn-icons-png.flaticon.com/512/14309/14309346.png",
-    "bytes": 13600
+    "url": "https://cdn-icons-png.flaticon.com/512/2554/2554917.png",
+    "bytes": 13283
   },
   "vehicles/bike": {
-    "url": "https://cdn-icons-png.flaticon.com/512/418/418224.png",
-    "bytes": 29339
+    "url": "https://cdn-icons-png.flaticon.com/512/2554/2554968.png",
+    "bytes": 23261
   },
   "vehicles/boat": {
-    "url": "https://cdn-icons-png.flaticon.com/512/1023/1023340.png",
-    "bytes": 19334
+    "url": "https://cdn-icons-png.flaticon.com/512/2554/2554925.png",
+    "bytes": 17963
   },
   "vehicles/truck": {
-    "url": "https://cdn-icons-png.flaticon.com/512/870/870130.png",
-    "bytes": 18705
+    "url": "https://cdn-icons-png.flaticon.com/512/2554/2554962.png",
+    "bytes": 50229
   },
   "vehicles/scooter": {
-    "url": "https://cdn-icons-png.flaticon.com/512/9492/9492129.png",
-    "bytes": 11503
+    "url": "https://cdn-icons-png.flaticon.com/512/3324/3324553.png",
+    "bytes": 19726
   },
   "colors/red": {
     "url": "generated-cute-swatch:red",
@@ -159,7 +160,7 @@
     "note": "Cute color swatch for clear kid recognition"
   },
   "colors/rainbow-preview": {
-    "url": "https://cdn-icons-png.flaticon.com/512/1451/1451408.png",
-    "bytes": 29285
+    "url": "https://cdn-icons-png.flaticon.com/512/3075/3075049.png",
+    "bytes": 57887
   }
 }

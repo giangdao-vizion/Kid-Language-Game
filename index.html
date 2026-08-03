@@ -22,15 +22,32 @@
   </div>
 
   <main class="app">
-    <!-- HOME -->
+    <!-- HOME: mode picker -->
     <section id="home" class="screen active" aria-label="Màn hình chính">
       <header class="brand">
         <p class="brand-mark">Tiny Ears</p>
         <h1>Chạm vào ảnh, nghe tiếng Anh!</h1>
-        <p class="subtitle">Chọn một chủ đề để bắt đầu học nào</p>
+        <p class="subtitle">Chọn chế độ để bắt đầu nào</p>
       </header>
 
-      <div class="home-options" aria-label="Tùy chọn học">
+      <div class="mode-grid" aria-label="Chế độ chơi">
+        <button type="button" id="mode-practice-btn" class="mode-card" style="--accent:#42A5F5">
+          <span class="mode-icon" aria-hidden="true">
+            <img src="assets/images/home/book.png" alt="" />
+          </span>
+          <span class="mode-label">Tập luyện</span>
+          <span class="mode-desc">Chọn danh mục để nghe và học từ</span>
+        </button>
+        <button type="button" id="mode-exercise-btn" class="mode-card" style="--accent:#FF6B4A">
+          <span class="mode-icon" aria-hidden="true">
+            <img src="assets/images/fruits/apple.png" alt="" />
+          </span>
+          <span class="mode-label">Bài tập</span>
+          <span class="mode-desc">Chơi theo level hỏi đáp</span>
+        </button>
+      </div>
+
+      <div class="home-options home-options-compact" aria-label="Tùy chọn chung">
         <div class="option-group">
           <p class="option-label">Giọng đọc</p>
           <div class="segmented" role="radiogroup" aria-label="Chọn giọng đọc">
@@ -38,6 +55,21 @@
             <button type="button" class="segment-btn" data-voice="man" aria-pressed="false">Man</button>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- PRACTICE: categories -->
+    <section id="practice" class="screen" aria-label="Tập luyện" hidden>
+      <header class="lesson-top">
+        <button id="practice-back" class="icon-btn" type="button" aria-label="Quay lại">←</button>
+        <div class="lesson-meta">
+          <p class="lesson-cat">Tập luyện</p>
+          <p class="lesson-progress">Chọn một danh mục</p>
+        </div>
+        <span class="icon-spacer" aria-hidden="true"></span>
+      </header>
+
+      <div class="home-options" aria-label="Tùy chọn tập luyện">
         <div class="option-group">
           <p class="option-label">Thứ tự từ</p>
           <div class="segmented" role="radiogroup" aria-label="Chế độ thứ tự từ">
@@ -84,23 +116,31 @@
           <span class="cat-sub">Màu sắc</span>
         </button>
       </nav>
+    </section>
 
-      <section class="game-entry" aria-label="Chơi game hỏi đáp">
-        <h2 class="game-entry-title">Chơi game hỏi đáp</h2>
-        <p class="game-entry-sub">Học trước, rồi trả lời “What is this?”</p>
-        <div class="level-grid">
-          <button type="button" id="level1-btn" class="level-btn" style="--accent:#FF6B4A">
-            <span class="level-badge">Level 1</span>
-            <span class="level-name">Nhìn hình trả lời</span>
-            <span class="level-desc">Học → hỏi đáp · 5 / 10 / 15 từ</span>
-          </button>
-          <button type="button" class="level-btn is-locked" disabled aria-disabled="true" style="--accent:#95A5A6">
-            <span class="level-badge">Level 2</span>
-            <span class="level-name">Sắp ra mắt</span>
-            <span class="level-desc">Coming soon</span>
-          </button>
+    <!-- EXERCISES: levels -->
+    <section id="exercises" class="screen" aria-label="Bài tập" hidden>
+      <header class="lesson-top">
+        <button id="exercises-back" class="icon-btn" type="button" aria-label="Quay lại">←</button>
+        <div class="lesson-meta">
+          <p class="lesson-cat">Bài tập</p>
+          <p class="lesson-progress">Chọn một level</p>
         </div>
-      </section>
+        <span class="icon-spacer" aria-hidden="true"></span>
+      </header>
+
+      <div class="level-grid">
+        <button type="button" id="level1-btn" class="level-btn" style="--accent:#FF6B4A">
+          <span class="level-badge">Level 1</span>
+          <span class="level-name">Nhìn hình trả lời</span>
+          <span class="level-desc">Học → hỏi đáp · 5 / 10 / 15 từ</span>
+        </button>
+        <button type="button" class="level-btn is-locked" disabled aria-disabled="true" style="--accent:#95A5A6">
+          <span class="level-badge">Level 2</span>
+          <span class="level-name">Sắp ra mắt</span>
+          <span class="level-desc">Coming soon</span>
+        </button>
+      </div>
     </section>
 
     <!-- LESSON -->

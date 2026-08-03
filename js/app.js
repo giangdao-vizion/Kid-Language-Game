@@ -11,6 +11,8 @@ const ORDER_KEY = "tiny-ears-order";
 const SCORE_FACTOR = 10;
 
 const homeScreen = document.getElementById("home");
+const practiceScreen = document.getElementById("practice");
+const exercisesScreen = document.getElementById("exercises");
 const lessonScreen = document.getElementById("lesson");
 const gameLearnScreen = document.getElementById("game-learn");
 const gameQuizScreen = document.getElementById("game-quiz");
@@ -31,6 +33,10 @@ const speakBtn = document.getElementById("speak-btn");
 const backBtn = document.getElementById("back-btn");
 const shuffleBtn = document.getElementById("shuffle-btn");
 
+const modePracticeBtn = document.getElementById("mode-practice-btn");
+const modeExerciseBtn = document.getElementById("mode-exercise-btn");
+const practiceBack = document.getElementById("practice-back");
+const exercisesBack = document.getElementById("exercises-back");
 const level1Btn = document.getElementById("level1-btn");
 const gameLearnBack = document.getElementById("game-learn-back");
 const gameLearnProgress = document.getElementById("game-learn-progress");
@@ -76,6 +82,8 @@ let quizGraded = false;
 
 const allScreens = [
   homeScreen,
+  practiceScreen,
+  exercisesScreen,
   lessonScreen,
   gameLearnScreen,
   gameQuizScreen,
@@ -417,7 +425,7 @@ prevBtn.addEventListener("click", () => go(-1));
 nextBtn.addEventListener("click", () => go(1));
 backBtn.addEventListener("click", () => {
   player.pause();
-  showScreen(homeScreen);
+  showScreen(practiceScreen);
 });
 shuffleBtn.addEventListener("click", () => {
   if (!currentCategory) return;
@@ -427,6 +435,11 @@ shuffleBtn.addEventListener("click", () => {
   renderCard();
   playWord();
 });
+
+modePracticeBtn.addEventListener("click", () => showScreen(practiceScreen));
+modeExerciseBtn.addEventListener("click", () => showScreen(exercisesScreen));
+practiceBack.addEventListener("click", () => showScreen(homeScreen));
+exercisesBack.addEventListener("click", () => showScreen(homeScreen));
 
 level1Btn.addEventListener("click", openCountModal);
 countModal.querySelectorAll("[data-close-modal]").forEach((el) => {
@@ -438,7 +451,7 @@ countModal.querySelectorAll("[data-count]").forEach((btn) => {
 
 gameLearnBack.addEventListener("click", () => {
   player.pause();
-  showScreen(homeScreen);
+  showScreen(exercisesScreen);
 });
 gameLearnCard.addEventListener("click", playGameLearnWord);
 gameLearnSpeak.addEventListener("click", playGameLearnWord);
@@ -454,7 +467,7 @@ gameStartQuiz.addEventListener("click", startQuiz);
 
 gameQuizBack.addEventListener("click", () => {
   player.pause();
-  showScreen(homeScreen);
+  showScreen(exercisesScreen);
 });
 gameQuizCard.addEventListener("click", () => {
   if (quizWaitingNext) {
