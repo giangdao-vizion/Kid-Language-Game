@@ -8,9 +8,15 @@ const CATEGORY_META = {
 
 const VOICE_KEY = "tiny-ears-voice";
 const ORDER_KEY = "tiny-ears-order";
+const SCORE_FACTOR = 10;
 
 const homeScreen = document.getElementById("home");
 const lessonScreen = document.getElementById("lesson");
+const gameLearnScreen = document.getElementById("game-learn");
+const gameQuizScreen = document.getElementById("game-quiz");
+const gameResultScreen = document.getElementById("game-result");
+const countModal = document.getElementById("count-modal");
+
 const categoryTitle = document.getElementById("category-title");
 const progressEl = document.getElementById("progress");
 const wordImage = document.getElementById("word-image");
@@ -25,6 +31,34 @@ const speakBtn = document.getElementById("speak-btn");
 const backBtn = document.getElementById("back-btn");
 const shuffleBtn = document.getElementById("shuffle-btn");
 
+const level1Btn = document.getElementById("level1-btn");
+const gameLearnBack = document.getElementById("game-learn-back");
+const gameLearnProgress = document.getElementById("game-learn-progress");
+const gameLearnHint = document.getElementById("game-learn-hint");
+const gameLearnCard = document.getElementById("game-learn-card");
+const gameLearnImage = document.getElementById("game-learn-image");
+const gameLearnWord = document.getElementById("game-learn-word");
+const gameLearnHintVi = document.getElementById("game-learn-hint-vi");
+const gameLearnPrev = document.getElementById("game-learn-prev");
+const gameLearnSpeak = document.getElementById("game-learn-speak");
+const gameLearnNext = document.getElementById("game-learn-next");
+const gameStartQuiz = document.getElementById("game-start-quiz");
+
+const gameQuizBack = document.getElementById("game-quiz-back");
+const gameQuizProgress = document.getElementById("game-quiz-progress");
+const gameQuizPrompt = document.getElementById("game-quiz-prompt");
+const gameQuizCard = document.getElementById("game-quiz-card");
+const gameQuizImage = document.getElementById("game-quiz-image");
+const gameQuizAnswer = document.getElementById("game-quiz-answer");
+const gameCorrectBtn = document.getElementById("game-correct-btn");
+const gameWrongBtn = document.getElementById("game-wrong-btn");
+const gameQuizNext = document.getElementById("game-quiz-next");
+
+const resultSummary = document.getElementById("result-summary");
+const resultScore = document.getElementById("result-score");
+const resultReplay = document.getElementById("result-replay");
+const resultHome = document.getElementById("result-home");
+
 let lessons = {};
 let currentCategory = null;
 let queue = [];
@@ -33,11 +67,27 @@ let heard = new Set();
 let currentVoice = localStorage.getItem(VOICE_KEY) || "woman";
 let orderMode = localStorage.getItem(ORDER_KEY) || "normal";
 
+let gameDeck = [];
+let gameIndex = 0;
+let gameCorrect = 0;
+let gameCount = 10;
+let quizWaitingNext = false;
+let quizGraded = false;
+
+const allScreens = [
+  homeScreen,
+  lessonScreen,
+  gameLearnScreen,
+  gameQuizScreen,
+  gameResultScreen,
+];
+
 function speakerIcon() {
   return `<svg class="speaker" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4zm11.5 3a3.5 3.5 0 0 0-1.5-2.9v5.8A3.5 3.5 0 0 0 15.5 12zm0-7.2v2.06A6.5 6.5 0 0 1 19 12a6.5 6.5 0 0 1-3.5 5.14v2.06A8.5 8.5 0 0 0 21 12a8.5 8.5 0 0 0-5.5-7.2z"/></svg>`;
 }
 
 speakBtn.innerHTML = `${speakerIcon()} Nghe lại`;
+gameLearnSpeak.innerHTML = `${speakerIcon()} Nghe lại`;
 
 function syncOptionButtons() {
   document.querySelectorAll("[data-voice]").forEach((btn) => {
@@ -61,7 +111,7 @@ async function loadLessons() {
 }
 
 function showScreen(screen) {
-  [homeScreen, lessonScreen].forEach((el) => {
+  allScreens.forEach((el) => {
     el.classList.remove("active");
     el.hidden = true;
   });
@@ -78,6 +128,10 @@ function shuffle(list) {
   return arr;
 }
 
+function allWords() {
+  return Object.values(lessons).flat();
+}
+
 function buildQueue(category) {
   const base = [...(lessons[category] || [])];
   return orderMode === "random" ? shuffle(base) : base;
@@ -87,6 +141,26 @@ function audioFor(item) {
   if (!item?.audio) return "";
   if (typeof item.audio === "string") return item.audio;
   return item.audio[currentVoice] || item.audio.woman || item.audio.man || "";
+}
+
+function gameAudio(name) {
+  return `assets/audio/game/${currentVoice}/${name}.mp3`;
+}
+
+function playSrc(src, { bounceEl } = {}) {
+  if (bounceEl) {
+    bounceEl.classList.remove("playing");
+    void bounceEl.offsetWidth;
+    bounceEl.classList.add("playing");
+  }
+  player.pause();
+  player.src = src;
+  player.currentTime = 0;
+  const playPromise = player.play();
+  if (playPromise) {
+    playPromise.catch(() => {});
+  }
+  return playPromise;
 }
 
 function openCategory(category) {
@@ -153,19 +227,7 @@ function playWord() {
   const item = currentItem();
   if (!item) return;
 
-  card.classList.remove("playing");
-  void card.offsetWidth;
-  card.classList.add("playing");
-
-  player.pause();
-  player.src = audioFor(item);
-  player.currentTime = 0;
-  const playPromise = player.play();
-  if (playPromise) {
-    playPromise.catch(() => {
-      // Autoplay may be blocked until a gesture; ignore quietly.
-    });
-  }
+  playSrc(audioFor(item), { bounceEl: card });
 
   if (!heard.has(item.id)) {
     heard.add(item.id);
@@ -198,6 +260,145 @@ function setOrderMode(mode) {
   syncOptionButtons();
 }
 
+function openCountModal() {
+  countModal.hidden = false;
+  document.body.classList.add("modal-open");
+}
+
+function closeCountModal() {
+  countModal.hidden = true;
+  document.body.classList.remove("modal-open");
+}
+
+function startLevel1(count) {
+  const pool = allWords();
+  if (pool.length < count) {
+    alert(`Chưa đủ từ trong kho (hiện có ${pool.length}).`);
+    return;
+  }
+  gameCount = count;
+  gameDeck = shuffle(pool).slice(0, count);
+  gameIndex = 0;
+  gameCorrect = 0;
+  quizWaitingNext = false;
+  quizGraded = false;
+  closeCountModal();
+  showScreen(gameLearnScreen);
+  renderGameLearn();
+  playGameLearnWord();
+}
+
+function currentGameItem() {
+  return gameDeck[gameIndex];
+}
+
+function renderGameLearn() {
+  const item = currentGameItem();
+  if (!item) return;
+  gameLearnImage.src = item.image;
+  gameLearnImage.alt = item.word;
+  gameLearnWord.textContent = item.word;
+  gameLearnHintVi.textContent = item.hint;
+  gameLearnProgress.textContent = `${gameIndex + 1} / ${gameDeck.length}`;
+  gameLearnPrev.disabled = gameIndex === 0;
+  const isLast = gameIndex === gameDeck.length - 1;
+  gameLearnNext.textContent = isLast ? "Xong ›" : "Sau ›";
+  gameStartQuiz.hidden = !isLast;
+  gameLearnHint.textContent = "Chạm vào hình để nghe lại";
+  gameLearnWord.classList.remove("reveal");
+  void gameLearnWord.offsetWidth;
+  gameLearnWord.classList.add("reveal");
+}
+
+function playGameLearnWord() {
+  const item = currentGameItem();
+  if (!item) return;
+  playSrc(audioFor(item), { bounceEl: gameLearnCard });
+}
+
+function goGameLearn(delta) {
+  const next = gameIndex + delta;
+  if (next < 0 || next >= gameDeck.length) return;
+  gameIndex = next;
+  renderGameLearn();
+  playGameLearnWord();
+}
+
+function startQuiz() {
+  gameIndex = 0;
+  gameCorrect = 0;
+  quizWaitingNext = false;
+  quizGraded = false;
+  showScreen(gameQuizScreen);
+  renderGameQuiz();
+  playWhatIsThis();
+}
+
+function renderGameQuiz() {
+  const item = currentGameItem();
+  if (!item) return;
+  gameQuizImage.src = item.image;
+  gameQuizImage.alt = "What is this?";
+  gameQuizProgress.textContent = `${gameIndex + 1} / ${gameDeck.length}`;
+  gameQuizAnswer.textContent = `Đáp án (phụ huynh): ${item.word}`;
+  gameQuizPrompt.textContent = "What is this?";
+  gameQuizNext.hidden = true;
+  quizWaitingNext = false;
+  quizGraded = false;
+  gameCorrectBtn.disabled = false;
+  gameWrongBtn.disabled = false;
+  gameCorrectBtn.classList.remove("is-used");
+  gameWrongBtn.classList.remove("is-used");
+}
+
+function playWhatIsThis() {
+  playSrc(gameAudio("what-is-this"), { bounceEl: gameQuizCard });
+}
+
+function finishGame() {
+  const score = gameCorrect * SCORE_FACTOR;
+  resultSummary.textContent = `Đúng ${gameCorrect} / ${gameDeck.length}`;
+  resultScore.textContent = `${score} điểm`;
+  showScreen(gameResultScreen);
+  burstConfetti(resultScore);
+}
+
+function advanceQuiz() {
+  if (gameIndex >= gameDeck.length - 1) {
+    finishGame();
+    return;
+  }
+  gameIndex += 1;
+  renderGameQuiz();
+  playWhatIsThis();
+}
+
+function markCorrect() {
+  if (quizGraded) return;
+  quizGraded = true;
+  gameCorrect += 1;
+  gameCorrectBtn.classList.add("is-used");
+  gameWrongBtn.disabled = true;
+  gameCorrectBtn.disabled = true;
+  gameQuizNext.hidden = true;
+  playSrc(gameAudio("correct"), { bounceEl: gameQuizCard });
+  burstConfetti(gameQuizCard);
+  window.setTimeout(() => advanceQuiz(), 900);
+}
+
+function markWrong() {
+  if (quizGraded && !quizWaitingNext) return;
+  if (!quizGraded) {
+    quizGraded = true;
+    quizWaitingNext = true;
+    gameWrongBtn.classList.add("is-used");
+    gameCorrectBtn.disabled = true;
+    gameQuizNext.hidden = false;
+  }
+  playSrc(gameAudio("try-again"), { bounceEl: gameQuizCard });
+  gameQuizPrompt.textContent = "Please try again";
+}
+
 document.querySelectorAll(".cat-btn").forEach((btn) => {
   btn.addEventListener("click", () => openCategory(btn.dataset.category));
 });
@@ -227,17 +428,67 @@ shuffleBtn.addEventListener("click", () => {
   playWord();
 });
 
-document.addEventListener("keydown", (event) => {
-  if (!lessonScreen.classList.contains("active")) return;
-  if (event.key === "ArrowRight") go(1);
-  if (event.key === "ArrowLeft") go(-1);
-  if (event.key === " " || event.key === "Enter") {
-    event.preventDefault();
-    playWord();
+level1Btn.addEventListener("click", openCountModal);
+countModal.querySelectorAll("[data-close-modal]").forEach((el) => {
+  el.addEventListener("click", closeCountModal);
+});
+countModal.querySelectorAll("[data-count]").forEach((btn) => {
+  btn.addEventListener("click", () => startLevel1(Number(btn.dataset.count)));
+});
+
+gameLearnBack.addEventListener("click", () => {
+  player.pause();
+  showScreen(homeScreen);
+});
+gameLearnCard.addEventListener("click", playGameLearnWord);
+gameLearnSpeak.addEventListener("click", playGameLearnWord);
+gameLearnPrev.addEventListener("click", () => goGameLearn(-1));
+gameLearnNext.addEventListener("click", () => {
+  if (gameIndex >= gameDeck.length - 1) {
+    startQuiz();
+    return;
   }
-  if (event.key === "Escape") {
-    player.pause();
-    showScreen(homeScreen);
+  goGameLearn(1);
+});
+gameStartQuiz.addEventListener("click", startQuiz);
+
+gameQuizBack.addEventListener("click", () => {
+  player.pause();
+  showScreen(homeScreen);
+});
+gameQuizCard.addEventListener("click", () => {
+  if (quizWaitingNext) {
+    playWhatIsThis();
+    return;
+  }
+  playWhatIsThis();
+});
+gameCorrectBtn.addEventListener("click", markCorrect);
+gameWrongBtn.addEventListener("click", markWrong);
+gameQuizNext.addEventListener("click", advanceQuiz);
+
+resultReplay.addEventListener("click", openCountModal);
+resultHome.addEventListener("click", () => {
+  player.pause();
+  showScreen(homeScreen);
+});
+
+document.addEventListener("keydown", (event) => {
+  if (!countModal.hidden && event.key === "Escape") {
+    closeCountModal();
+    return;
+  }
+  if (lessonScreen.classList.contains("active")) {
+    if (event.key === "ArrowRight") go(1);
+    if (event.key === "ArrowLeft") go(-1);
+    if (event.key === " " || event.key === "Enter") {
+      event.preventDefault();
+      playWord();
+    }
+    if (event.key === "Escape") {
+      player.pause();
+      showScreen(homeScreen);
+    }
   }
 });
 

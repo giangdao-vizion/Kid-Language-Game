@@ -518,6 +518,329 @@ body {
   100% { transform: translateY(90px) rotate(220deg); opacity: 0; }
 }
 
+.game-entry {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.game-entry-title {
+  margin: 0;
+  font-family: "Baloo 2", cursive;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 800;
+}
+
+.game-entry-sub {
+  margin: 0.25rem 0 1rem;
+  color: var(--ink-soft);
+  font-weight: 700;
+}
+
+.level-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.9rem;
+}
+
+.level-btn {
+  appearance: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 1.1rem 1.15rem 1.2rem;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.level-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 8px;
+  background: var(--accent);
+}
+
+.level-btn:hover,
+.level-btn:focus-visible {
+  transform: translateY(-4px);
+  outline: none;
+  box-shadow: 0 18px 40px rgba(43, 58, 74, 0.16);
+}
+
+.level-btn.is-locked {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: var(--shadow);
+}
+
+.level-badge {
+  display: inline-block;
+  margin-top: 0.35rem;
+  font-family: "Baloo 2", cursive;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--accent);
+}
+
+.level-name {
+  display: block;
+  margin-top: 0.15rem;
+  font-family: "Baloo 2", cursive;
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+
+.level-desc {
+  display: block;
+  margin-top: 0.2rem;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.icon-spacer {
+  width: 52px;
+  height: 52px;
+}
+
+.primary-cta {
+  appearance: none;
+  border: none;
+  cursor: pointer;
+  margin-top: 0.4rem;
+  padding: 0.95rem 1.4rem;
+  border-radius: 999px;
+  font-family: inherit;
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: #fff;
+  background: linear-gradient(135deg, #3ECF8E, #2BB673);
+  box-shadow: 0 12px 28px rgba(62, 207, 142, 0.35);
+}
+
+.primary-cta:hover,
+.primary-cta:focus-visible {
+  transform: translateY(-2px);
+  outline: none;
+}
+
+.parent-answer {
+  margin: 0;
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  font-weight: 800;
+}
+
+.grade-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-top: 0.35rem;
+}
+
+.grade-btn {
+  appearance: none;
+  border: none;
+  cursor: pointer;
+  min-width: 132px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.95rem 1.25rem;
+  border-radius: 999px;
+  font-family: inherit;
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: #fff;
+  box-shadow: var(--shadow);
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.grade-btn:hover,
+.grade-btn:focus-visible {
+  transform: translateY(-2px);
+  outline: none;
+}
+
+.grade-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.grade-correct {
+  background: linear-gradient(135deg, #3ECF8E, #2BB673);
+}
+
+.grade-wrong {
+  background: linear-gradient(135deg, #FF6B4A, #E74C3C);
+}
+
+.grade-btn.is-used {
+  outline: 3px solid rgba(255, 255, 255, 0.7);
+}
+
+.grade-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.25);
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.game-skip-btn {
+  margin-top: 0.2rem;
+}
+
+.result-card {
+  width: min(440px, 100%);
+  margin: 2rem auto 0;
+  padding: 2rem 1.4rem;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 32px;
+  box-shadow: var(--shadow);
+}
+
+.result-eyebrow {
+  margin: 0;
+  color: var(--brand);
+  font-weight: 800;
+}
+
+.result-title {
+  margin: 0.2rem 0 0.6rem;
+  font-family: "Baloo 2", cursive;
+  font-size: clamp(2rem, 7vw, 2.8rem);
+  font-weight: 800;
+}
+
+.result-summary {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+
+.result-score {
+  margin: 0.35rem 0 0;
+  font-family: "Baloo 2", cursive;
+  font-size: clamp(2.4rem, 8vw, 3.2rem);
+  font-weight: 800;
+  color: var(--brand);
+}
+
+.result-note {
+  margin: 0.15rem 0 1.2rem;
+  color: var(--ink-soft);
+  font-weight: 700;
+}
+
+.result-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.7rem;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+}
+
+.modal[hidden] {
+  display: none !important;
+}
+
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(43, 58, 74, 0.35);
+  backdrop-filter: blur(2px);
+}
+
+.modal-panel {
+  position: relative;
+  width: min(420px, 100%);
+  padding: 1.5rem 1.25rem 1.2rem;
+  border-radius: 28px;
+  background: #fff;
+  box-shadow: 0 20px 50px rgba(43, 58, 74, 0.25);
+  text-align: center;
+  animation: rise 0.3s ease both;
+}
+
+.modal-panel h2 {
+  margin: 0;
+  font-family: "Baloo 2", cursive;
+  font-size: 1.6rem;
+  font-weight: 800;
+}
+
+.modal-sub {
+  margin: 0.35rem 0 1rem;
+  color: var(--ink-soft);
+  font-weight: 700;
+}
+
+.count-choices {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.count-btn {
+  appearance: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.95rem 1rem;
+  border-radius: 18px;
+  font-family: inherit;
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: var(--ink);
+  background: #FFF3E8;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.count-btn:hover,
+.count-btn:focus-visible {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #FF6B4A, #FF9F43);
+  color: #fff;
+  outline: none;
+}
+
+.modal-cancel {
+  appearance: none;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  margin-top: 0.85rem;
+  font-family: inherit;
+  font-weight: 800;
+  color: var(--ink-soft);
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
 @media (max-width: 560px) {
   .app {
     width: min(100% - 1.25rem, 920px);
@@ -542,5 +865,9 @@ body {
   .nav-btn {
     min-width: 96px;
     padding: 0.75rem 0.9rem;
+  }
+
+  .grade-btn {
+    min-width: 120px;
   }
 }

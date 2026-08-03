@@ -47,9 +47,16 @@ python3 scripts/download_flaticon_icons.py
 ## Cách chơi
 
 1. Chọn giọng **Woman** hoặc **Man**, và thứ tự **Theo thứ tự** / **Ngẫu nhiên**.
-2. Chọn một chủ đề trên màn hình chính.
+2. Chọn một chủ đề trên màn hình chính để học từ vựng.
 3. Chạm vào hình (hoặc nút **Nghe lại**) để nghe từ tiếng Anh.
 4. Dùng **Trước / Sau** để chuyển từ, **↻** để xáo trộn lại.
+
+### Game hỏi đáp — Level 1
+
+1. Bấm **Level 1** → chọn số từ **5 / 10 / 15**.
+2. **Học từ:** xem lần lượt từng hình, nghe phát âm, chạm hình để nghe lại.
+3. **Hỏi đáp:** app hỏi “What is this?”, phụ huynh chấm **Đúng** (✓ → “Correct!” rồi qua từ tiếp) hoặc **Sai** (✕ → “Please try again”, có nút **Tiếp theo** để bỏ qua).
+4. Kết thúc hiện số đúng (ví dụ `5/10`) và điểm = số đúng × 10.
 
 ## Giọng đọc
 

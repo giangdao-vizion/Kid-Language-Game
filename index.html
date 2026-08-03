@@ -84,6 +84,23 @@
           <span class="cat-sub">Màu sắc</span>
         </button>
       </nav>
+
+      <section class="game-entry" aria-label="Chơi game hỏi đáp">
+        <h2 class="game-entry-title">Chơi game hỏi đáp</h2>
+        <p class="game-entry-sub">Học trước, rồi trả lời “What is this?”</p>
+        <div class="level-grid">
+          <button type="button" id="level1-btn" class="level-btn" style="--accent:#FF6B4A">
+            <span class="level-badge">Level 1</span>
+            <span class="level-name">Nhìn hình trả lời</span>
+            <span class="level-desc">Học → hỏi đáp · 5 / 10 / 15 từ</span>
+          </button>
+          <button type="button" class="level-btn is-locked" disabled aria-disabled="true" style="--accent:#95A5A6">
+            <span class="level-badge">Level 2</span>
+            <span class="level-name">Sắp ra mắt</span>
+            <span class="level-desc">Coming soon</span>
+          </button>
+        </div>
+      </section>
     </section>
 
     <!-- LESSON -->
@@ -117,7 +134,111 @@
         </div>
       </div>
     </section>
+
+    <!-- GAME LEARN -->
+    <section id="game-learn" class="screen" aria-label="Game: học từ" hidden>
+      <header class="lesson-top">
+        <button id="game-learn-back" class="icon-btn" type="button" aria-label="Quay lại">←</button>
+        <div class="lesson-meta">
+          <p class="lesson-cat">Level 1 · Học từ</p>
+          <p id="game-learn-progress" class="lesson-progress">1 / 10</p>
+        </div>
+        <span class="icon-spacer" aria-hidden="true"></span>
+      </header>
+
+      <div class="lesson-stage">
+        <p class="tap-hint" id="game-learn-hint">Chạm vào hình để nghe lại</p>
+
+        <button id="game-learn-card" class="word-card" type="button" aria-label="Nghe từ">
+          <img id="game-learn-image" src="" alt="" />
+          <span class="pulse-ring" aria-hidden="true"></span>
+        </button>
+
+        <div class="word-panel">
+          <p id="game-learn-word" class="word-text">apple</p>
+          <p id="game-learn-hint-vi" class="word-hint">quả táo</p>
+        </div>
+
+        <div class="controls">
+          <button id="game-learn-prev" class="nav-btn" type="button">‹ Trước</button>
+          <button id="game-learn-speak" class="speak-btn" type="button">Nghe lại</button>
+          <button id="game-learn-next" class="nav-btn" type="button">Sau ›</button>
+        </div>
+
+        <button id="game-start-quiz" class="primary-cta" type="button" hidden>
+          Bắt đầu hỏi đáp
+        </button>
+      </div>
+    </section>
+
+    <!-- GAME QUIZ -->
+    <section id="game-quiz" class="screen" aria-label="Game: hỏi đáp" hidden>
+      <header class="lesson-top">
+        <button id="game-quiz-back" class="icon-btn" type="button" aria-label="Quay lại">←</button>
+        <div class="lesson-meta">
+          <p class="lesson-cat">Level 1 · Hỏi đáp</p>
+          <p id="game-quiz-progress" class="lesson-progress">1 / 10</p>
+        </div>
+        <span class="icon-spacer" aria-hidden="true"></span>
+      </header>
+
+      <div class="lesson-stage">
+        <p class="tap-hint" id="game-quiz-prompt">What is this?</p>
+
+        <button id="game-quiz-card" class="word-card" type="button" aria-label="Nghe lại câu hỏi">
+          <img id="game-quiz-image" src="" alt="" />
+          <span class="pulse-ring" aria-hidden="true"></span>
+        </button>
+
+        <p class="parent-answer" id="game-quiz-answer">Đáp án: apple</p>
+
+        <div class="grade-row">
+          <button id="game-correct-btn" class="grade-btn grade-correct" type="button" aria-label="Đúng">
+            <span class="grade-icon" aria-hidden="true">✓</span>
+            Đúng
+          </button>
+          <button id="game-wrong-btn" class="grade-btn grade-wrong" type="button" aria-label="Sai">
+            <span class="grade-icon" aria-hidden="true">✕</span>
+            Sai
+          </button>
+        </div>
+
+        <button id="game-quiz-next" class="nav-btn game-skip-btn" type="button" hidden>
+          Tiếp theo ›
+        </button>
+      </div>
+    </section>
+
+    <!-- GAME RESULT -->
+    <section id="game-result" class="screen" aria-label="Kết quả game" hidden>
+      <div class="result-card">
+        <p class="result-eyebrow">Level 1 hoàn thành!</p>
+        <h2 class="result-title">Giỏi quá!</h2>
+        <p id="result-summary" class="result-summary">Đúng 5 / 10</p>
+        <p id="result-score" class="result-score">50 điểm</p>
+        <p class="result-note">Hệ số điểm ×10</p>
+        <div class="result-actions">
+          <button id="result-replay" class="speak-btn" type="button">Chơi lại</button>
+          <button id="result-home" class="nav-btn" type="button">Về trang chủ</button>
+        </div>
+      </div>
+    </section>
   </main>
+
+  <!-- COUNT MODAL -->
+  <div id="count-modal" class="modal" hidden>
+    <div class="modal-backdrop" data-close-modal></div>
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="count-modal-title">
+      <h2 id="count-modal-title">Chọn số từ cho Level 1</h2>
+      <p class="modal-sub">App sẽ random đúng số lượng từ từ mọi chủ đề</p>
+      <div class="count-choices">
+        <button type="button" class="count-btn" data-count="5">5 từ</button>
+        <button type="button" class="count-btn" data-count="10">10 từ</button>
+        <button type="button" class="count-btn" data-count="15">15 từ</button>
+      </div>
+      <button type="button" class="modal-cancel" data-close-modal>Hủy</button>
+    </div>
+  </div>
 
   <audio id="player" preload="auto"></audio>
   <footer class="credits">
