@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Download Flaticon PNG icons listed in scripts/flaticon_map.json."""
+"""Download PNG icons listed in scripts/flaticon_map.json (Flaticon/Icons8/etc.)."""
 
 from __future__ import annotations
 
