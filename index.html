@@ -12,6 +12,7 @@
   <link rel="icon" href="favicon.png" type="image/png" sizes="512x512" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/games.css" />
 </head>
 <body>
   <div class="sky" aria-hidden="true">
@@ -30,7 +31,7 @@
         <p class="subtitle">Chọn chế độ để bắt đầu nào</p>
       </header>
 
-      <div class="mode-grid" aria-label="Chế độ chơi">
+      <div class="mode-grid mode-grid-3" aria-label="Chế độ chơi">
         <button type="button" id="mode-practice-btn" class="mode-card" style="--accent:#42A5F5">
           <span class="mode-icon" aria-hidden="true">
             <img src="assets/images/home/book.png" alt="" />
@@ -45,6 +46,13 @@
           <span class="mode-label">Bài tập</span>
           <span class="mode-desc">Chơi theo level hỏi đáp</span>
         </button>
+        <button type="button" id="mode-games-btn" class="mode-card" style="--accent:#AB47BC">
+          <span class="mode-icon" aria-hidden="true">
+            <img src="assets/images/animals/lion.png" alt="" />
+          </span>
+          <span class="mode-label">Game</span>
+          <span class="mode-desc">Trò chơi tương tác vui nhộn</span>
+        </button>
       </div>
 
       <div class="home-options home-options-compact" aria-label="Tùy chọn chung">
@@ -54,6 +62,159 @@
             <button type="button" class="segment-btn active" data-voice="woman" aria-pressed="true">Woman</button>
             <button type="button" class="segment-btn" data-voice="man" aria-pressed="false">Man</button>
           </div>
+        </div>
+        <div class="option-group">
+          <p class="option-label">Âm thanh</p>
+          <button type="button" id="audio-settings-btn" class="segment-btn" style="width:100%">Cài đặt nhạc &amp; SFX</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- GAMES HUB -->
+    <section id="games-hub" class="screen" aria-label="Game" hidden>
+      <header class="lesson-top">
+        <button id="games-hub-back" class="icon-btn" type="button" aria-label="Quay lại">←</button>
+        <div class="lesson-meta">
+          <p class="lesson-cat">Game</p>
+          <p class="lesson-progress">Chọn một trò chơi</p>
+        </div>
+        <span class="games-points-pill" title="Điểm tích lũy">⭐ <strong id="games-hub-points">0</strong></span>
+      </header>
+
+      <div class="game-pick-grid" aria-label="Danh sách game">
+        <button type="button" class="game-pick" data-open-game="memory" style="--accent:#42A5F5">
+          <span class="game-pick-kicker">Game 1</span>
+          <span class="game-pick-title">Memory Matching</span>
+          <span class="game-pick-desc">Lật thẻ ghép đôi — luyện nhớ từ và hình</span>
+        </button>
+        <button type="button" class="game-pick" data-open-game="quiz" style="--accent:#FF6B4A">
+          <span class="game-pick-kicker">Game 2</span>
+          <span class="game-pick-title">Quiz Battle</span>
+          <span class="game-pick-desc">Trắc nghiệm đếm ngược — combo &amp; trợ giúp</span>
+        </button>
+        <button type="button" class="game-pick" data-open-game="wheel" style="--accent:#AB47BC">
+          <span class="game-pick-kicker">Game 3</span>
+          <span class="game-pick-title">Wheel of Fortune</span>
+          <span class="game-pick-desc">Vòng quay may mắn — nhận điểm &amp; lượt</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- MEMORY MATCHING -->
+    <section id="ig-memory" class="screen ig-screen" aria-label="Memory Matching" hidden>
+      <header class="lesson-top">
+        <button type="button" class="icon-btn" data-memory-exit aria-label="Quay lại">←</button>
+        <div class="lesson-meta">
+          <p class="lesson-cat">Memory Matching</p>
+          <p class="lesson-progress">Lật thẻ ghép đôi</p>
+        </div>
+        <span class="icon-spacer" aria-hidden="true"></span>
+      </header>
+      <div class="lesson-stage ig-panel">
+        <div data-memory-setup class="ig-setup">
+          <h2>Chọn độ khó</h2>
+          <p>Ghép hết các cặp trước khi hết giờ</p>
+          <div class="diff-row">
+            <button type="button" class="diff-btn" data-memory-diff="easy">Dễ · 4×3</button>
+            <button type="button" class="diff-btn" data-memory-diff="medium">Trung bình · 4×4</button>
+            <button type="button" class="diff-btn" data-memory-diff="hard">Khó · 5×4</button>
+          </div>
+        </div>
+        <div data-memory-hud class="ig-hud" hidden>
+          <span class="ig-chip">⏱ <span data-memory-time>90s</span></span>
+          <span class="ig-chip">Moves <span data-memory-moves>0</span></span>
+          <span class="ig-chip">Điểm <span data-memory-score>0</span></span>
+        </div>
+        <div data-memory-board-wrap hidden>
+          <div data-memory-board class="memory-board" role="grid" aria-label="Bảng thẻ"></div>
+        </div>
+        <div data-memory-result class="ig-result" hidden>
+          <h3 data-memory-result-title>Kết quả</h3>
+          <div data-memory-result-body></div>
+          <div class="ig-actions" style="margin-top:0.8rem">
+            <button type="button" class="speak-btn" data-memory-again>Chơi lại</button>
+            <button type="button" class="nav-btn" data-memory-exit>Về Game</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUIZ BATTLE -->
+    <section id="ig-quiz" class="screen ig-screen" aria-label="Quiz Battle" hidden>
+      <header class="lesson-top">
+        <button type="button" class="icon-btn" data-quiz-exit aria-label="Quay lại">←</button>
+        <div class="lesson-meta">
+          <p class="lesson-cat">Quiz Battle</p>
+          <p class="lesson-progress" data-quiz-progress>1 / 10</p>
+        </div>
+        <span class="icon-spacer" aria-hidden="true"></span>
+      </header>
+      <div class="lesson-stage ig-panel">
+        <div data-quiz-setup class="ig-setup">
+          <h2>Quiz Battle</h2>
+          <p>10 câu hỏi · combo streak · trợ giúp 50/50, +thời gian, đổi câu</p>
+          <button type="button" class="speak-btn" data-quiz-start>Bắt đầu</button>
+        </div>
+        <div data-quiz-play hidden>
+          <div class="ig-hud">
+            <span class="ig-chip" data-quiz-streak>Combo ×1</span>
+            <span class="ig-chip">Điểm <span data-quiz-score>0</span></span>
+          </div>
+          <div class="quiz-timer" aria-hidden="true"><div class="quiz-timer-fill" data-quiz-timer-fill></div></div>
+          <p class="quiz-timer-text" data-quiz-timer-text>20s</p>
+          <p class="quiz-prompt" data-quiz-prompt>What is this?</p>
+          <div class="quiz-image-wrap"><img data-quiz-image src="" alt="" /></div>
+          <div class="quiz-choices" data-quiz-choices></div>
+          <div class="quiz-lifelines">
+            <button type="button" class="life-btn" data-quiz-ff>50/50 (1)</button>
+            <button type="button" class="life-btn" data-quiz-time>+10s (1)</button>
+            <button type="button" class="life-btn" data-quiz-skip>Đổi câu (1)</button>
+          </div>
+        </div>
+        <div data-quiz-result class="ig-result" hidden>
+          <h3>Tổng kết</h3>
+          <div data-quiz-result-body></div>
+          <div class="ig-actions" style="margin-top:0.8rem">
+            <button type="button" class="speak-btn" data-quiz-again>Chơi lại</button>
+            <button type="button" class="nav-btn" data-quiz-exit>Về Game</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHEEL OF FORTUNE -->
+    <section id="ig-wheel" class="screen ig-screen" aria-label="Wheel of Fortune" hidden>
+      <header class="lesson-top">
+        <button type="button" class="icon-btn" data-wheel-exit aria-label="Quay lại">←</button>
+        <div class="lesson-meta">
+          <p class="lesson-cat">Wheel of Fortune</p>
+          <p class="lesson-progress">Vòng quay may mắn</p>
+        </div>
+        <span class="icon-spacer" aria-hidden="true"></span>
+      </header>
+      <div class="lesson-stage ig-panel">
+        <div class="ig-hud">
+          <span class="ig-chip">Lượt <span data-wheel-spins>5</span></span>
+          <span class="ig-chip">Điểm <span data-wheel-points>0</span></span>
+        </div>
+        <div class="wheel-stage">
+          <div class="wheel-pointer" aria-hidden="true"></div>
+          <div class="wheel-disk" data-wheel>
+            <span class="wheel-center" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="ig-actions">
+          <button type="button" class="speak-btn" data-wheel-spin>Quay!</button>
+          <button type="button" class="nav-btn" data-wheel-buy>Đổi 1 lượt (50 điểm)</button>
+        </div>
+        <p class="tap-hint" style="margin-top:0.75rem">Mỗi ngày có 5 lượt miễn phí · tỷ lệ cấu hình trong js/games/config.js</p>
+      </div>
+      <div class="wheel-popup" data-wheel-popup hidden>
+        <div class="wheel-popup-backdrop" data-wheel-popup-close></div>
+        <div class="wheel-popup-panel" role="dialog" aria-modal="true">
+          <h3 data-wheel-popup-title>Chúc mừng!</h3>
+          <p data-wheel-popup-body></p>
+          <button type="button" class="speak-btn" data-wheel-popup-close style="margin-top:0.75rem">OK</button>
         </div>
       </div>
     </section>
@@ -277,6 +438,32 @@
         <button type="button" class="count-btn" data-count="15">15 từ</button>
       </div>
       <button type="button" class="modal-cancel" data-close-modal>Hủy</button>
+    </div>
+  </div>
+
+  <!-- AUDIO SETTINGS -->
+  <div id="audio-settings" class="modal audio-modal" hidden>
+    <div class="modal-backdrop" data-close-audio></div>
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="audio-settings-title">
+      <h2 id="audio-settings-title">Cài đặt âm thanh</h2>
+      <p class="modal-sub">Bật/tắt và chỉnh riêng nhạc nền (BGM) và hiệu ứng (SFX)</p>
+      <div class="audio-row">
+        <label for="audio-bgm-toggle">Nhạc nền (BGM)</label>
+        <input id="audio-bgm-toggle" type="checkbox" checked />
+      </div>
+      <div class="audio-row">
+        <label for="audio-bgm-volume">Âm lượng BGM</label>
+        <input id="audio-bgm-volume" type="range" min="0" max="100" value="35" />
+      </div>
+      <div class="audio-row">
+        <label for="audio-sfx-toggle">Hiệu ứng (SFX)</label>
+        <input id="audio-sfx-toggle" type="checkbox" checked />
+      </div>
+      <div class="audio-row">
+        <label for="audio-sfx-volume">Âm lượng SFX</label>
+        <input id="audio-sfx-volume" type="range" min="0" max="100" value="70" />
+      </div>
+      <button type="button" class="modal-cancel" data-close-audio>Đóng</button>
     </div>
   </div>
 

@@ -20,6 +20,10 @@ const lessonScreen = document.getElementById("lesson");
 const gameLearnScreen = document.getElementById("game-learn");
 const gameQuizScreen = document.getElementById("game-quiz");
 const gameResultScreen = document.getElementById("game-result");
+const gamesHubScreen = document.getElementById("games-hub");
+const igMemoryScreen = document.getElementById("ig-memory");
+const igQuizScreen = document.getElementById("ig-quiz");
+const igWheelScreen = document.getElementById("ig-wheel");
 const countModal = document.getElementById("count-modal");
 
 const categoryTitle = document.getElementById("category-title");
@@ -97,7 +101,11 @@ const allScreens = [
   gameLearnScreen,
   gameQuizScreen,
   gameResultScreen,
-];
+  gamesHubScreen,
+  igMemoryScreen,
+  igQuizScreen,
+  igWheelScreen,
+].filter(Boolean);
 
 function speakerIcon() {
   return `<svg class="speaker" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4zm11.5 3a3.5 3.5 0 0 0-1.5-2.9v5.8A3.5 3.5 0 0 0 15.5 12zm0-7.2v2.06A6.5 6.5 0 0 1 19 12a6.5 6.5 0 0 1-3.5 5.14v2.06A8.5 8.5 0 0 0 21 12a8.5 8.5 0 0 0-5.5-7.2z"/></svg>`;
@@ -693,8 +701,33 @@ document.addEventListener("keydown", (event) => {
 syncOptionButtons();
 preloadGameSfx();
 
-loadLessons().catch((err) => {
-  wordText.textContent = "Oops!";
-  wordHint.textContent = err.message;
-  console.error(err);
-});
+loadLessons()
+  .then(async () => {
+    const { initGamesHub } = await import("./games/hub.js");
+    const { audioManager } = await import("./audio-manager.js");
+    initGamesHub({
+      getWords: allWords,
+      showScreen,
+      screens: {
+        home: homeScreen,
+        gamesHub: gamesHubScreen,
+        memory: igMemoryScreen,
+        quiz: igQuizScreen,
+        wheel: igWheelScreen,
+      },
+    });
+    // Soft lobby BGM after first user gesture anywhere
+    const unlockOnce = async () => {
+      await audioManager.unlock();
+      if (homeScreen.classList.contains("active")) {
+        audioManager.playBgm("lobby");
+      }
+      document.removeEventListener("pointerdown", unlockOnce);
+    };
+    document.addEventListener("pointerdown", unlockOnce, { once: true });
+  })
+  .catch((err) => {
+    wordText.textContent = "Oops!";
+    wordHint.textContent = err.message;
+    console.error(err);
+  });
