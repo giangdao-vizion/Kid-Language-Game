@@ -9,6 +9,9 @@ const CATEGORY_META = {
 const VOICE_KEY = "tiny-ears-voice";
 const ORDER_KEY = "tiny-ears-order";
 const SCORE_FACTOR = 10;
+const LEARN_REPEAT_GAP_MS = 2000;
+const LEARN_NEXT_DELAY_MS = 3000;
+const GAME_SFX_NAMES = ["correct", "try-again", "what-is-this", "your-turn"];
 
 const homeScreen = document.getElementById("home");
 const practiceScreen = document.getElementById("practice");
@@ -17,6 +20,10 @@ const lessonScreen = document.getElementById("lesson");
 const gameLearnScreen = document.getElementById("game-learn");
 const gameQuizScreen = document.getElementById("game-quiz");
 const gameResultScreen = document.getElementById("game-result");
+const gamesHubScreen = document.getElementById("games-hub");
+const igMemoryScreen = document.getElementById("ig-memory");
+const igQuizScreen = document.getElementById("ig-quiz");
+const igWheelScreen = document.getElementById("ig-wheel");
 const countModal = document.getElementById("count-modal");
 
 const categoryTitle = document.getElementById("category-title");
@@ -80,6 +87,12 @@ let gameCount = 10;
 let quizWaitingNext = false;
 let quizGraded = false;
 
+let learnSeqToken = 0;
+let quizPromptToken = 0;
+let activeSfx = null;
+const sfxBlobUrls = new Map();
+let sfxPreloadPromise = null;
+
 const allScreens = [
   homeScreen,
   practiceScreen,
@@ -88,7 +101,11 @@ const allScreens = [
   gameLearnScreen,
   gameQuizScreen,
   gameResultScreen,
-];
+  gamesHubScreen,
+  igMemoryScreen,
+  igQuizScreen,
+  igWheelScreen,
+].filter(Boolean);
 
 function speakerIcon() {
   return `<svg class="speaker" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4zm11.5 3a3.5 3.5 0 0 0-1.5-2.9v5.8A3.5 3.5 0 0 0 15.5 12zm0-7.2v2.06A6.5 6.5 0 0 1 19 12a6.5 6.5 0 0 1-3.5 5.14v2.06A8.5 8.5 0 0 0 21 12a8.5 8.5 0 0 0-5.5-7.2z"/></svg>`;
@@ -155,20 +172,130 @@ function gameAudio(name) {
   return `assets/audio/game/${currentVoice}/${name}.mp3`;
 }
 
-function playSrc(src, { bounceEl } = {}) {
-  if (bounceEl) {
-    bounceEl.classList.remove("playing");
-    void bounceEl.offsetWidth;
-    bounceEl.classList.add("playing");
+function stopWordPlayer() {
+  try {
+    player.pause();
+  } catch {
+    /* ignore */
   }
-  player.pause();
+}
+
+function stopSfx() {
+  if (!activeSfx) return;
+  try {
+    activeSfx.pause();
+  } catch {
+    /* ignore */
+  }
+  activeSfx = null;
+}
+
+function stopAllAudio() {
+  stopWordPlayer();
+  stopSfx();
+}
+
+function cancelLearnSequence() {
+  learnSeqToken += 1;
+}
+
+function cancelQuizPrompt() {
+  quizPromptToken += 1;
+}
+
+function wait(ms) {
+  return new Promise((resolve) => {
+    window.setTimeout(resolve, ms);
+  });
+}
+
+function waitAudioEnd(audio, timeoutMs = 5000) {
+  return new Promise((resolve) => {
+    let done = false;
+    const finish = () => {
+      if (done) return;
+      done = true;
+      resolve();
+    };
+    if (!audio) {
+      finish();
+      return;
+    }
+    if (audio.ended) {
+      finish();
+      return;
+    }
+    audio.addEventListener("ended", finish, { once: true });
+    audio.addEventListener("error", finish, { once: true });
+    window.setTimeout(finish, timeoutMs);
+  });
+}
+
+function bounce(el) {
+  if (!el) return;
+  el.classList.remove("playing");
+  void el.offsetWidth;
+  el.classList.add("playing");
+}
+
+function playSrc(src, { bounceEl } = {}) {
+  if (!src) return null;
+  bounce(bounceEl);
+  stopWordPlayer();
   player.src = src;
   player.currentTime = 0;
   const playPromise = player.play();
   if (playPromise) {
     playPromise.catch(() => {});
   }
-  return playPromise;
+  return player;
+}
+
+/** Instant feedback sounds via dedicated Audio + preloaded blobs. */
+function playSfx(name, { bounceEl } = {}) {
+  const path = gameAudio(name);
+  const url = sfxBlobUrls.get(path) || path;
+  bounce(bounceEl);
+  stopSfx();
+  const audio = new Audio(url);
+  audio.preload = "auto";
+  activeSfx = audio;
+  const playPromise = audio.play();
+  if (playPromise) {
+    playPromise.catch(() => {
+      // Fallback: try original path once if blob failed
+      if (url !== path) {
+        const retry = new Audio(path);
+        activeSfx = retry;
+        retry.play().catch(() => {});
+      }
+    });
+  }
+  return audio;
+}
+
+async function preloadGameSfx() {
+  if (sfxPreloadPromise) return sfxPreloadPromise;
+  sfxPreloadPromise = (async () => {
+    const voices = ["woman", "man"];
+    await Promise.all(
+      voices.flatMap((voice) =>
+        GAME_SFX_NAMES.map(async (name) => {
+          const src = `assets/audio/game/${voice}/${name}.mp3`;
+          if (sfxBlobUrls.has(src)) return;
+          try {
+            const res = await fetch(src);
+            if (!res.ok) return;
+            const blob = await res.blob();
+            sfxBlobUrls.set(src, URL.createObjectURL(blob));
+          } catch {
+            /* keep remote path as fallback */
+          }
+        })
+      )
+    );
+  })();
+  return sfxPreloadPromise;
 }
 
 function openCategory(category) {
@@ -176,6 +303,9 @@ function openCategory(category) {
     wordHint.textContent = "Đang tải bài học, thử lại nhé!";
     return;
   }
+  cancelLearnSequence();
+  cancelQuizPrompt();
+  stopAllAudio();
   currentCategory = category;
   queue = buildQueue(category);
   index = 0;
@@ -278,12 +408,13 @@ function closeCountModal() {
   document.body.classList.remove("modal-open");
 }
 
-function startLevel1(count) {
+async function startLevel1(count) {
   const pool = allWords();
   if (pool.length < count) {
     alert(`Chưa đủ từ trong kho (hiện có ${pool.length}).`);
     return;
   }
+  await preloadGameSfx();
   gameCount = count;
   gameDeck = shuffle(pool).slice(0, count);
   gameIndex = 0;
@@ -293,7 +424,7 @@ function startLevel1(count) {
   closeCountModal();
   showScreen(gameLearnScreen);
   renderGameLearn();
-  playGameLearnWord();
+  runLearnAutoPlay();
 }
 
 function currentGameItem() {
@@ -312,16 +443,55 @@ function renderGameLearn() {
   const isLast = gameIndex === gameDeck.length - 1;
   gameLearnNext.textContent = isLast ? "Xong ›" : "Sau ›";
   gameStartQuiz.hidden = !isLast;
-  gameLearnHint.textContent = "Chạm vào hình để nghe lại";
+  gameLearnHint.textContent = "Đang nghe từ… (đọc 2 lần)";
   gameLearnWord.classList.remove("reveal");
   void gameLearnWord.offsetWidth;
   gameLearnWord.classList.add("reveal");
 }
 
-function playGameLearnWord() {
+function playGameLearnWordOnce() {
+  const item = currentGameItem();
+  if (!item) return null;
+  return playSrc(audioFor(item), { bounceEl: gameLearnCard });
+}
+
+function playGameLearnWordManual() {
+  cancelLearnSequence();
+  gameLearnHint.textContent = "Chạm vào hình để nghe lại";
+  playGameLearnWordOnce();
+}
+
+async function runLearnAutoPlay() {
+  const token = ++learnSeqToken;
   const item = currentGameItem();
   if (!item) return;
-  playSrc(audioFor(item), { bounceEl: gameLearnCard });
+
+  gameLearnHint.textContent = "Đang nghe từ… (lần 1/2)";
+  const first = playGameLearnWordOnce();
+  await waitAudioEnd(first);
+  if (token !== learnSeqToken) return;
+
+  await wait(LEARN_REPEAT_GAP_MS);
+  if (token !== learnSeqToken) return;
+
+  gameLearnHint.textContent = "Đang nghe từ… (lần 2/2)";
+  const second = playGameLearnWordOnce();
+  await waitAudioEnd(second);
+  if (token !== learnSeqToken) return;
+
+  gameLearnHint.textContent = "Chờ chút rồi sang từ tiếp theo…";
+  await wait(LEARN_NEXT_DELAY_MS);
+  if (token !== learnSeqToken) return;
+
+  if (gameIndex >= gameDeck.length - 1) {
+    gameLearnHint.textContent = "Xong! Bắt đầu hỏi đáp nhé";
+    gameStartQuiz.hidden = false;
+    return;
+  }
+
+  gameIndex += 1;
+  renderGameLearn();
+  runLearnAutoPlay();
 }
 
 function goGameLearn(delta) {
@@ -329,17 +499,20 @@ function goGameLearn(delta) {
   if (next < 0 || next >= gameDeck.length) return;
   gameIndex = next;
   renderGameLearn();
-  playGameLearnWord();
+  runLearnAutoPlay();
 }
 
-function startQuiz() {
+async function startQuiz() {
+  cancelLearnSequence();
+  stopAllAudio();
+  await preloadGameSfx();
   gameIndex = 0;
   gameCorrect = 0;
   quizWaitingNext = false;
   quizGraded = false;
   showScreen(gameQuizScreen);
   renderGameQuiz();
-  playWhatIsThis();
+  runQuizPrompt();
 }
 
 function renderGameQuiz() {
@@ -349,7 +522,7 @@ function renderGameQuiz() {
   gameQuizImage.alt = "What is this?";
   gameQuizProgress.textContent = `${gameIndex + 1} / ${gameDeck.length}`;
   gameQuizAnswer.textContent = `Đáp án (phụ huynh): ${item.word}`;
-  gameQuizPrompt.textContent = "What is this?";
+  gameQuizPrompt.textContent = "Your turn!";
   gameQuizNext.hidden = true;
   quizWaitingNext = false;
   quizGraded = false;
@@ -359,11 +532,29 @@ function renderGameQuiz() {
   gameWrongBtn.classList.remove("is-used");
 }
 
+async function runQuizPrompt() {
+  const token = ++quizPromptToken;
+  gameQuizPrompt.textContent = "Your turn!";
+  const turnAudio = playSfx("your-turn", { bounceEl: gameQuizCard });
+  await waitAudioEnd(turnAudio);
+  if (token !== quizPromptToken) return;
+
+  await wait(350);
+  if (token !== quizPromptToken) return;
+
+  gameQuizPrompt.textContent = "What is this?";
+  playSfx("what-is-this", { bounceEl: gameQuizCard });
+}
+
 function playWhatIsThis() {
-  playSrc(gameAudio("what-is-this"), { bounceEl: gameQuizCard });
+  cancelQuizPrompt();
+  gameQuizPrompt.textContent = "What is this?";
+  playSfx("what-is-this", { bounceEl: gameQuizCard });
 }
 
 function finishGame() {
+  cancelQuizPrompt();
+  stopAllAudio();
   const score = gameCorrect * SCORE_FACTOR;
   resultSummary.textContent = `Đúng ${gameCorrect} / ${gameDeck.length}`;
   resultScore.textContent = `${score} điểm`;
@@ -378,7 +569,7 @@ function advanceQuiz() {
   }
   gameIndex += 1;
   renderGameQuiz();
-  playWhatIsThis();
+  runQuizPrompt();
 }
 
 function markCorrect() {
@@ -389,7 +580,8 @@ function markCorrect() {
   gameWrongBtn.disabled = true;
   gameCorrectBtn.disabled = true;
   gameQuizNext.hidden = true;
-  playSrc(gameAudio("correct"), { bounceEl: gameQuizCard });
+  // Play feedback immediately on a separate channel (does not wait for word player).
+  playSfx("correct", { bounceEl: gameQuizCard });
   burstConfetti(gameQuizCard);
   window.setTimeout(() => advanceQuiz(), 900);
 }
@@ -403,7 +595,7 @@ function markWrong() {
     gameCorrectBtn.disabled = true;
     gameQuizNext.hidden = false;
   }
-  playSrc(gameAudio("try-again"), { bounceEl: gameQuizCard });
+  playSfx("try-again", { bounceEl: gameQuizCard });
   gameQuizPrompt.textContent = "Please try again";
 }
 
@@ -424,7 +616,7 @@ speakBtn.addEventListener("click", playWord);
 prevBtn.addEventListener("click", () => go(-1));
 nextBtn.addEventListener("click", () => go(1));
 backBtn.addEventListener("click", () => {
-  player.pause();
+  stopAllAudio();
   showScreen(practiceScreen);
 });
 shuffleBtn.addEventListener("click", () => {
@@ -441,7 +633,10 @@ modeExerciseBtn.addEventListener("click", () => showScreen(exercisesScreen));
 practiceBack.addEventListener("click", () => showScreen(homeScreen));
 exercisesBack.addEventListener("click", () => showScreen(homeScreen));
 
-level1Btn.addEventListener("click", openCountModal);
+level1Btn.addEventListener("click", () => {
+  preloadGameSfx();
+  openCountModal();
+});
 countModal.querySelectorAll("[data-close-modal]").forEach((el) => {
   el.addEventListener("click", closeCountModal);
 });
@@ -450,11 +645,12 @@ countModal.querySelectorAll("[data-count]").forEach((btn) => {
 });
 
 gameLearnBack.addEventListener("click", () => {
-  player.pause();
+  cancelLearnSequence();
+  stopAllAudio();
   showScreen(exercisesScreen);
 });
-gameLearnCard.addEventListener("click", playGameLearnWord);
-gameLearnSpeak.addEventListener("click", playGameLearnWord);
+gameLearnCard.addEventListener("click", playGameLearnWordManual);
+gameLearnSpeak.addEventListener("click", playGameLearnWordManual);
 gameLearnPrev.addEventListener("click", () => goGameLearn(-1));
 gameLearnNext.addEventListener("click", () => {
   if (gameIndex >= gameDeck.length - 1) {
@@ -466,14 +662,11 @@ gameLearnNext.addEventListener("click", () => {
 gameStartQuiz.addEventListener("click", startQuiz);
 
 gameQuizBack.addEventListener("click", () => {
-  player.pause();
+  cancelQuizPrompt();
+  stopAllAudio();
   showScreen(exercisesScreen);
 });
 gameQuizCard.addEventListener("click", () => {
-  if (quizWaitingNext) {
-    playWhatIsThis();
-    return;
-  }
   playWhatIsThis();
 });
 gameCorrectBtn.addEventListener("click", markCorrect);
@@ -482,7 +675,7 @@ gameQuizNext.addEventListener("click", advanceQuiz);
 
 resultReplay.addEventListener("click", openCountModal);
 resultHome.addEventListener("click", () => {
-  player.pause();
+  stopAllAudio();
   showScreen(homeScreen);
 });
 
@@ -499,16 +692,42 @@ document.addEventListener("keydown", (event) => {
       playWord();
     }
     if (event.key === "Escape") {
-      player.pause();
+      stopAllAudio();
       showScreen(homeScreen);
     }
   }
 });
 
 syncOptionButtons();
+preloadGameSfx();
 
-loadLessons().catch((err) => {
-  wordText.textContent = "Oops!";
-  wordHint.textContent = err.message;
-  console.error(err);
-});
+loadLessons()
+  .then(async () => {
+    const { initGamesHub } = await import("./games/hub.js");
+    const { audioManager } = await import("./audio-manager.js");
+    initGamesHub({
+      getWords: allWords,
+      showScreen,
+      screens: {
+        home: homeScreen,
+        gamesHub: gamesHubScreen,
+        memory: igMemoryScreen,
+        quiz: igQuizScreen,
+        wheel: igWheelScreen,
+      },
+    });
+    // Soft lobby BGM after first user gesture anywhere
+    const unlockOnce = async () => {
+      await audioManager.unlock();
+      if (homeScreen.classList.contains("active")) {
+        audioManager.playBgm("lobby");
+      }
+      document.removeEventListener("pointerdown", unlockOnce);
+    };
+    document.addEventListener("pointerdown", unlockOnce, { once: true });
+  })
+  .catch((err) => {
+    wordText.textContent = "Oops!";
+    wordHint.textContent = err.message;
+    console.error(err);
+  });

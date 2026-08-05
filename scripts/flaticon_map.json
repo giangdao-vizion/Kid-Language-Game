@@ -8,8 +8,10 @@
     "bytes": 49417
   },
   "animals/bird": {
-    "url": "https://cdn-icons-png.flaticon.com/512/3069/3069172.png",
-    "bytes": 42223
+    "url": "https://img.icons8.com/color/512/bird.png",
+    "bytes": 17445,
+    "source": "icons8-color",
+    "note": "Replaced after visual audit; previous asset did not match the word"
   },
   "animals/fish": {
     "url": "https://cdn-icons-png.flaticon.com/512/2395/2395887.png",
@@ -28,8 +30,10 @@
     "bytes": 32522
   },
   "animals/duck": {
-    "url": "https://cdn-icons-png.flaticon.com/512/8686/8686248.png",
-    "bytes": 45394
+    "url": "https://img.icons8.com/color/512/duck.png",
+    "bytes": 16254,
+    "source": "icons8-color",
+    "note": "Replaced after visual audit; previous asset did not match the word"
   },
   "fruits/apple": {
     "url": "https://cdn-icons-png.flaticon.com/512/415/415733.png",
@@ -40,52 +44,70 @@
     "bytes": 43870
   },
   "fruits/orange": {
-    "url": "https://cdn-icons-png.flaticon.com/512/415/415731.png",
-    "bytes": 16324
+    "url": "https://img.icons8.com/color/512/orange.png",
+    "bytes": 19939,
+    "source": "icons8-color",
+    "note": "Replaced after visual audit; previous asset did not match the word"
   },
   "fruits/grape": {
-    "url": "https://cdn-icons-png.flaticon.com/512/415/415734.png",
-    "bytes": 19854
+    "url": "https://img.icons8.com/color/512/grapes.png",
+    "bytes": 33994,
+    "source": "icons8-color",
+    "note": "Replaced after visual audit; previous asset did not match the word"
   },
   "fruits/strawberry": {
-    "url": "https://cdn-icons-png.flaticon.com/512/415/415735.png",
-    "bytes": 13118
+    "url": "https://img.icons8.com/color/512/strawberry.png",
+    "bytes": 21675,
+    "source": "icons8-color",
+    "note": "Replaced after visual audit; previous asset did not match the word"
   },
   "fruits/watermelon": {
-    "url": "https://cdn-icons-png.flaticon.com/512/415/415729.png",
-    "bytes": 22618
+    "url": "https://img.icons8.com/color/512/watermelon.png",
+    "bytes": 18386,
+    "source": "icons8-color",
+    "note": "Replaced after visual audit; previous asset did not match the word"
   },
   "fruits/mango": {
     "url": "https://cdn-icons-png.flaticon.com/512/4284/4284893.png",
     "bytes": 3967
   },
   "fruits/cherry": {
-    "url": "https://cdn-icons-png.flaticon.com/512/415/415726.png",
-    "bytes": 29430
+    "url": "https://img.icons8.com/color/512/cherry.png",
+    "bytes": 18975,
+    "source": "icons8-color",
+    "note": "Replaced after visual audit; previous asset did not match the word"
   },
   "home/chair": {
     "url": "https://cdn-icons-png.flaticon.com/512/2944/2944135.png",
     "bytes": 19896
   },
   "home/table": {
-    "url": "https://cdn-icons-png.flaticon.com/512/2965/2965567.png",
-    "bytes": 23155
+    "url": "https://img.icons8.com/fluency/512/table.png",
+    "bytes": 4218,
+    "source": "icons8-fluency",
+    "note": "Replaced after visual audit; previous asset did not match the word"
   },
   "home/bed": {
-    "url": "https://cdn-icons-png.flaticon.com/512/2965/2965569.png",
-    "bytes": 27004
+    "url": "https://img.icons8.com/color/512/bed.png",
+    "bytes": 8837,
+    "source": "icons8-color",
+    "note": "Replaced after visual audit; previous asset did not match the word"
   },
   "home/lamp": {
-    "url": "https://cdn-icons-png.flaticon.com/512/6368/6368854.png",
-    "bytes": 32202
+    "url": "https://img.icons8.com/color/512/lamp.png",
+    "bytes": 7663,
+    "source": "icons8-color",
+    "note": "Replaced after visual audit; previous asset did not match the word"
   },
   "home/clock": {
     "url": "https://cdn-icons-png.flaticon.com/512/2784/2784459.png",
     "bytes": 37256
   },
   "home/door": {
-    "url": "https://cdn-icons-png.flaticon.com/512/12675/12675173.png",
-    "bytes": 50175
+    "url": "https://img.icons8.com/color/512/door.png",
+    "bytes": 5359,
+    "source": "icons8-color",
+    "note": "Replaced after visual audit; previous asset did not match the word"
   },
   "home/cup": {
     "url": "https://cdn-icons-png.flaticon.com/512/924/924514.png",
@@ -100,28 +122,40 @@
     "bytes": 28594
   },
   "vehicles/bus": {
-    "url": "https://cdn-icons-png.flaticon.com/512/2554/2554930.png",
-    "bytes": 40180
+    "url": "https://img.icons8.com/color/512/bus.png",
+    "bytes": 10424,
+    "source": "icons8-color",
+    "note": "Replaced after visual audit; previous asset did not match the word"
   },
   "vehicles/train": {
-    "url": "https://cdn-icons-png.flaticon.com/512/2554/2554950.png",
-    "bytes": 38019
+    "url": "https://img.icons8.com/color/512/train.png",
+    "bytes": 11480,
+    "source": "icons8-color",
+    "note": "Replaced after visual audit; previous asset did not match the word"
   },
   "vehicles/plane": {
-    "url": "https://cdn-icons-png.flaticon.com/512/2554/2554917.png",
-    "bytes": 13283
+    "url": "https://img.icons8.com/dusk/512/airplane-take-off.png",
+    "bytes": 21439,
+    "source": "icons8-dusk",
+    "note": "Side-view airplane for clear kid recognition"
   },
   "vehicles/bike": {
-    "url": "https://cdn-icons-png.flaticon.com/512/2554/2554968.png",
-    "bytes": 23261
+    "url": "https://img.icons8.com/color/512/bicycle.png",
+    "bytes": 25078,
+    "source": "icons8-color",
+    "note": "Replaced after visual audit; previous asset did not match the word"
   },
   "vehicles/boat": {
-    "url": "https://cdn-icons-png.flaticon.com/512/2554/2554925.png",
-    "bytes": 17963
+    "url": "https://img.icons8.com/color/512/sail-boat.png",
+    "bytes": 11083,
+    "source": "icons8-color",
+    "note": "Replaced after visual audit; previous asset did not match the word"
   },
   "vehicles/truck": {
-    "url": "https://cdn-icons-png.flaticon.com/512/2554/2554962.png",
-    "bytes": 50229
+    "url": "https://img.icons8.com/color/512/truck.png",
+    "bytes": 10222,
+    "source": "icons8-color",
+    "note": "Replaced after visual audit; previous asset did not match the word"
   },
   "vehicles/scooter": {
     "url": "https://cdn-icons-png.flaticon.com/512/3324/3324553.png",
