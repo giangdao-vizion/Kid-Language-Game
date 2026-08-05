@@ -134,10 +134,10 @@
     "note": "Replaced after visual audit; previous asset did not match the word"
   },
   "vehicles/plane": {
-    "url": "https://img.icons8.com/color/512/airplane-mode-on.png",
-    "bytes": 6833,
-    "source": "icons8-color",
-    "note": "Replaced after visual audit; previous asset did not match the word"
+    "url": "https://img.icons8.com/dusk/512/airplane-take-off.png",
+    "bytes": 21439,
+    "source": "icons8-dusk",
+    "note": "Side-view airplane for clear kid recognition"
   },
   "vehicles/bike": {
     "url": "https://img.icons8.com/color/512/bicycle.png",
