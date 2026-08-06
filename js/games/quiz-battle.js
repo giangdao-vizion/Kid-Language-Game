@@ -1,3 +1,4 @@
+import { resolveAsset } from "../asset-url.js";
 import { audioManager } from "../audio-manager.js";
 import { QUIZ_CONFIG, quizMultiplier, addPoints } from "./config.js";
 
@@ -170,7 +171,7 @@ export function createQuizBattle({ root, getWords, onExit }) {
     questionStartedAt = performance.now();
     els.progress.textContent = `${index + 1} / ${questions.length}`;
     els.prompt.textContent = q.prompt;
-    els.image.src = q.image;
+    els.image.src = resolveAsset(q.image);
     els.image.alt = q.word.word;
     els.streak.textContent = streak > 1 ? `Combo ×${quizMultiplier(streak)}` : "Combo ×1";
     els.score.textContent = String(score);

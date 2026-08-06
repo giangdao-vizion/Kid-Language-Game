@@ -1,3 +1,4 @@
+import { resolveAsset } from "../asset-url.js";
 import { audioManager } from "../audio-manager.js";
 import { MEMORY_CONFIG, addPoints } from "./config.js";
 
@@ -206,14 +207,34 @@ export function createMemoryGame({ root, getWords, onExit }) {
       btn.dataset.index = String(idx);
       btn.setAttribute("aria-label", "Thẻ úp");
       btn.setAttribute("aria-pressed", "false");
-      btn.innerHTML = `
-        <span class="memory-card-inner">
-          <span class="memory-face memory-back" aria-hidden="true">?</span>
-          <span class="memory-face memory-front">
-            <img src="${item.image}" alt="${item.word}" />
-          </span>
-        </span>
-      `;
+
+      const inner = document.createElement("span");
+      inner.className = "memory-card-inner";
+
+      const back = document.createElement("span");
+      back.className = "memory-face memory-back";
+      back.setAttribute("aria-hidden", "true");
+      back.textContent = "?";
+
+      const front = document.createElement("span");
+      front.className = "memory-face memory-front";
+
+      const img = document.createElement("img");
+      img.src = resolveAsset(item.image);
+      img.alt = item.word;
+      img.loading = "eager";
+      img.decoding = "async";
+      img.draggable = false;
+      img.onerror = () => {
+        img.remove();
+        front.textContent = item.word;
+        front.classList.add("memory-front-fallback");
+      };
+      front.appendChild(img);
+
+      inner.appendChild(back);
+      inner.appendChild(front);
+      btn.appendChild(inner);
       btn.addEventListener("click", () => flipCard(btn));
       els.board.appendChild(btn);
     });

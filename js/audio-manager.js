@@ -20,7 +20,6 @@ const BGM = {
   lobby: "assets/audio/bgm/lobby.mp3",
   memory: "assets/audio/bgm/memory.mp3",
   quiz: "assets/audio/bgm/quiz.mp3",
-  wheel: "assets/audio/bgm/wheel.mp3",
 };
 
 const SFX = {
@@ -35,8 +34,6 @@ const SFX = {
   "answer-select": "assets/audio/sfx/answer-select.mp3",
   "answer-correct": "assets/audio/sfx/answer-correct.mp3",
   "answer-wrong": "assets/audio/sfx/answer-wrong.mp3",
-  "wheel-tick": "assets/audio/sfx/wheel-tick.mp3",
-  "wheel-win": "assets/audio/sfx/wheel-win.mp3",
   victory: "assets/audio/sfx/victory.mp3",
   defeat: "assets/audio/sfx/defeat.mp3",
 };

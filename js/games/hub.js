@@ -2,10 +2,9 @@ import { audioManager } from "../audio-manager.js";
 import { getPoints } from "./config.js";
 import { createMemoryGame } from "./memory.js";
 import { createQuizBattle } from "./quiz-battle.js";
-import { createWheelGame } from "./wheel.js";
 
 /**
- * Wire the Game hub + three interactive games.
+ * Wire the Game hub + Memory Matching / Quiz Battle.
  * @param {{ getWords: () => any[], showScreen: (el: HTMLElement) => void, screens: Record<string, HTMLElement> }} api
  */
 export function initGamesHub(api) {
@@ -21,7 +20,6 @@ export function initGamesHub(api) {
   function goHub() {
     memory.close();
     quiz.close();
-    wheel.close();
     showScreen(screens.gamesHub);
     audioManager.playBgm("lobby");
     refreshPoints();
@@ -37,10 +35,6 @@ export function initGamesHub(api) {
     getWords,
     onExit: goHub,
   });
-  const wheel = createWheelGame({
-    root: screens.wheel,
-    onExit: goHub,
-  });
 
   document.getElementById("mode-games-btn")?.addEventListener("click", async () => {
     await audioManager.unlock();
@@ -52,7 +46,6 @@ export function initGamesHub(api) {
     audioManager.click();
     memory.close();
     quiz.close();
-    wheel.close();
     audioManager.playBgm("lobby");
     showScreen(screens.home);
   });
@@ -68,9 +61,6 @@ export function initGamesHub(api) {
       } else if (id === "quiz") {
         showScreen(screens.quiz);
         quiz.open();
-      } else if (id === "wheel") {
-        showScreen(screens.wheel);
-        wheel.open();
       }
     });
   });
@@ -115,21 +105,6 @@ export function initGamesHub(api) {
   sfxSlider?.addEventListener("input", () => {
     audioManager.setSfxVolume(Number(sfxSlider.value) / 100);
   });
-
-  // Global UI click SFX for main buttons (light touch)
-  document.addEventListener(
-    "click",
-    (e) => {
-      const t = e.target.closest("button");
-      if (!t) return;
-      if (t.closest("#memory-board") || t.closest("[data-quiz-choices]") || t.closest("[data-wheel]")) {
-        return;
-      }
-      // Avoid double-fire for buttons that already play explicit SFX in handlers
-      if (t.dataset.openGame || t.id === "mode-games-btn" || t.id === "audio-settings-btn") return;
-    },
-    true
-  );
 
   syncAudioUi();
   refreshPoints();

@@ -23,7 +23,6 @@ const gameResultScreen = document.getElementById("game-result");
 const gamesHubScreen = document.getElementById("games-hub");
 const igMemoryScreen = document.getElementById("ig-memory");
 const igQuizScreen = document.getElementById("ig-quiz");
-const igWheelScreen = document.getElementById("ig-wheel");
 const countModal = document.getElementById("count-modal");
 
 const categoryTitle = document.getElementById("category-title");
@@ -104,7 +103,6 @@ const allScreens = [
   gamesHubScreen,
   igMemoryScreen,
   igQuizScreen,
-  igWheelScreen,
 ].filter(Boolean);
 
 function speakerIcon() {
@@ -713,7 +711,6 @@ loadLessons()
         gamesHub: gamesHubScreen,
         memory: igMemoryScreen,
         quiz: igQuizScreen,
-        wheel: igWheelScreen,
       },
     });
     // Soft lobby BGM after first user gesture anywhere
